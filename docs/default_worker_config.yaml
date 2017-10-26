@@ -1,0 +1,29 @@
+---
+server:
+  # These settings should reflect those set in server.yaml under the `rpc_listener` section.
+  connect_to: "127.0.0.1:1339"
+  ssl_ca_certificate: |
+    -----BEGIN CERTIFICATE-----
+    <snip>
+    -----END CERTIFICATE-----
+  ssl_certificate: |
+    -----BEGIN CERTIFICATE-----
+    <snip>
+    -----END CERTIFICATE-----
+  ssl_private_key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    <snip>
+    -----END RSA PRIVATE KEY-----
+  server_name: dev_server
+intervals:
+  beacon: 60s
+hashcat:
+  log_path: /opt/gocrack/.hashcat/logs
+  session_path: /opt/gocrack/.hashcat/sessions
+  shared_path: /usr/local/share/hashcat
+# save_task_file_path is where task files (uncracked hashes) are saved during a task. They are removed when the task exits
+save_task_file_path: /opt/gocrack/files/task
+# save_engine_file_path is where dictionaries, mangling rules, etc are saved. They are cached on the worker and will remain until deleted.
+save_engine_file_path: /opt/gocrack/files/engine
+# engine_debug will export stdout/sterr from child processes (cracking tasks)
+engine_debug: true

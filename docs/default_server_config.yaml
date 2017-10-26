@@ -1,0 +1,55 @@
+---
+api_server:
+  listener:
+    # The IP/FQDN:port for the Userland/UI API
+    address: ":1338"
+  cors:
+    # For browsers: This sets the allowed origins where requests are allowed to be made from
+    allowed_origins:
+      - "http://localhost:8080"
+  ui:
+    # This should be set to a secure string as it's used to sign the user cookie for CSRF state
+    csrf_key: iAmAnIndependentStrongPassswordThatNeedsToBeSecure
+rpc_server:
+  listener:
+    # The IP/FQDN:port for the worker listener
+    address: ":1339"
+    # SSL Settings: This should *always* be enabled unless you're proxying it through a web server.
+    # If so, set this to false and the SSL fields below can be removed. You should still do SSL via the web server!
+    ssl_enabled: true
+    ssl_ca_certificate: |
+      -----BEGIN CERTIFICATE-----
+      <snip>
+      -----END CERTIFICATE-----
+    ssl_certificate: |
+      -----BEGIN CERTIFICATE-----
+      <snip>
+      -----END CERTIFICATE-----
+    ssl_private_key: |
+      -----BEGIN RSA PRIVATE KEY-----
+      <snip>
+      -----END RSA PRIVATE KEY-----
+database:
+  backend: bdb
+  connection_string: /opt/gocrack_server/storage.db
+file_manager:
+  engine_file_path: /opt/gocrack_server/files/engine
+  task_file_path: /opt/gocrack_server/files/task
+  import_path: /opt/gocrack_server/files/import
+authentication:
+  backend: "database"
+  # This should be kept a secret as it's used to sign the JWT's. Changing this will invalidate all created JWTs; forcing users to relogin.
+  secret_key: iAmAnIndependentStrongPassswordThatNeedsToBeSecure
+  backend_settings:
+    bcrypt_cost: 10
+    allow_registration: true
+notifications:
+  email_server:
+    address: smtp.gmail.com
+    certificate: |
+      -----BEGIN CERTIFICATE-----
+      <snip>
+      -----END CERTIFICATE-----
+  enabled: true
+  from_address: gocrack@password.crackers.local
+  public_address: http://gocrack.password.crackers.local

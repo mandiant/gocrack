@@ -1,0 +1,10 @@
+--- src/Makefile	2017-03-24 11:25:45.000000000 -0400
++++ src/Makefile_new	2017-03-24 11:25:43.000000000 -0400
+@@ -3,7 +3,7 @@
+ ## License.....: MIT
+ ##
+
+-SHARED                  := 0
++SHARED                  := 1
+ DEBUG                   := 0
+ PRODUCTION              := 1

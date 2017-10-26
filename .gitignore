@@ -1,0 +1,4 @@
+builds/
+**.out
+.vscode/
+configs/
