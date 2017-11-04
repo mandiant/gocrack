@@ -1,5 +1,5 @@
 ---
-api_server:
+web_server:
   listener:
     # The IP/FQDN:port for the Userland/UI API
     address: ":1338"
