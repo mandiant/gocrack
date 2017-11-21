@@ -22,6 +22,7 @@ type HashcatEngine struct {
 	TaskID            string
 	HashcatSharedPath string
 	SessionPath       string
+	PotfilePath       string
 
 	// Task Options
 	TaskFilePath   string
@@ -167,7 +168,8 @@ func (s *HashcatEngine) Start() error {
 		opts = hcargp.HashcatSessionOptions{
 			AttackMode:      hcargp.GetIntPtr(int(s.Options.AttackMode)),
 			HashType:        hcargp.GetIntPtr(s.Options.HashType),
-			PotfileDisable:  hcargp.GetBoolPtr(true),
+			PotfileDisable:  hcargp.GetBoolPtr(false),
+			PotfilePath:     hcargp.GetStringPtr(s.PotfilePath),
 			InputFile:       s.TaskFilePath,
 			SessionName:     hcargp.GetStringPtr(s.TaskID),
 			RestoreFilePath: hcargp.GetStringPtr(restoreFilePath),
