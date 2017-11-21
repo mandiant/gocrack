@@ -179,6 +179,7 @@ func (t *Task) Start() error {
 			TaskID:            t.taskid,
 			SessionPath:       t.cfg.Hashcat.SessionPath,
 			HashcatSharedPath: t.cfg.Hashcat.SharedPath,
+			PotfilePath:       t.cfg.Hashcat.PotfilePath,
 			TaskFilePath:      taskFilePath,
 			Options:           hashcatOpts,
 			CLDevices:         t.devices,
