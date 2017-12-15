@@ -33,7 +33,7 @@ func init() {
 	if CompileRev == "" {
 		CompileRev = "master"
 	}
-	web.SetVersionInfo(CompileTime, CompileRev)
+	web.SetVersionInfo(CompileRev, CompileTime)
 }
 
 // Server is a GoCrack server instance

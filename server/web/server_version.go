@@ -17,7 +17,7 @@ type WorkerVersionInfo struct {
 type ServerVersionInfo struct {
 	Workers           []WorkerVersionInfo `json:"workers"`
 	ServerVersion     string              `json:"version"`
-	ServerCompileTime string              `json:"compile_time"`
+	ServerCompileTime string              `json:"compiled_at"`
 }
 
 func (s *Server) webGetVersion(c *gin.Context) *WebAPIError {
