@@ -1,8 +1,10 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 	"sync"
+	"time"
 
 	"github.com/fireeye/gocrack/server/authentication"
 	"github.com/fireeye/gocrack/server/filemanager"
@@ -22,6 +24,17 @@ var (
 	// CompileRev is the git revision hash (sha1)
 	CompileRev string
 )
+
+func init() {
+	if CompileTime == "" {
+		CompileTime = fmt.Sprintf("%d", time.Now().UTC().Unix())
+	}
+
+	if CompileRev == "" {
+		CompileRev = "master"
+	}
+	web.SetVersionInfo(CompileTime, CompileRev)
+}
 
 // Server is a GoCrack server instance
 type Server struct {

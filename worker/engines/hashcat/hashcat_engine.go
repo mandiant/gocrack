@@ -18,6 +18,8 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+var HashcatVersion string
+
 type HashcatEngine struct {
 	TaskID            string
 	HashcatSharedPath string
