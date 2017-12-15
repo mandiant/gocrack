@@ -152,6 +152,7 @@ func (s *HashcatEngine) Start() error {
 			Strs("args", checkpoint.Args).
 			Msg("Parsed Restore File")
 
+		// Determine & Modify the restore file if the devices & platform information is incorrect
 		changed, err := ModifyRestoreFileDevices(&checkpoint, s.CLDevices, machDevices)
 		if err != nil {
 			return err

@@ -144,6 +144,10 @@ func (hcp HashcatTaskPayload) validate() []string {
 		if hcp.Masks == nil || *hcp.Masks == "" {
 			errs = append(errs, "masks must be set on a brute force attack mode")
 		}
+	case shared.AttackModeCombination:
+		if hcp.CombinatorFiles == nil || len(*hcp.CombinatorFiles) != 2 {
+			errs = append(errs, "combinator_files must contain 2 dictionary files")
+		}
 	}
 
 	return errs

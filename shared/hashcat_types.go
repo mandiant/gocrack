@@ -6,6 +6,8 @@ type HashcatAttackMode uint32
 const (
 	// AttackModeStraight is a dictionary attack with optional mangling rules applied
 	AttackModeStraight HashcatAttackMode = 0
+	// AttackModeCombination is a dictionary attack where exactly 2 dictionaries are specified and are combined together. https://hashcat.net/wiki/doku.php?id=combinator_attack
+	AttackModeCombination HashcatAttackMode = 1
 	// AttackModeBruteForce is a brute force attack using a list of masks to guess the password(s)
 	AttackModeBruteForce HashcatAttackMode = 3
 )
@@ -17,6 +19,7 @@ type HashcatUserOptions struct {
 	Masks            *string           `json:"masks,omitempty"`
 	DictionaryFile   *string           `json:"dictionary_file,omitempty"`
 	ManglingRuleFile *string           `json:"mangling_file,omitempty"`
+	CombinatorFiles  *[]string         `json:"combinator_files,omitempty"`
 }
 
 // HModeInfo describes the hashcat mode
