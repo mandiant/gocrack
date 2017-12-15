@@ -76,6 +76,8 @@ type TaskProcess struct {
 	UsingDevices []int
 }
 
+type EngineVersion map[string]string // map[engine_name]engine_version
+
 // Beacon describes the payload sent by a worker
 type Beacon struct {
 	WorkerVersion  string
@@ -83,6 +85,7 @@ type Beacon struct {
 	RequestNewTask bool
 	Devices        DeviceMap
 	Processes      map[string]TaskProcess // map[taskid]TaskProcess
+	Engines        EngineVersion
 }
 
 // GetIntPtr returns the address of i

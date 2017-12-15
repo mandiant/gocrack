@@ -29,7 +29,11 @@ hashcat:
 
 gocrack:
 		@mkdir -p $(GOCRACK_DIST)
-		$(DOCKER_BUILD) --build-arg GOCRACK_PROJ="$(GOCRACK_PROJ)" -t $(ROOT_PROJECT)/build -f Dockerfile.build.ubuntu $(CURDIR)
+		$(DOCKER_BUILD) \
+			--build-arg GOCRACK_PROJ="$(GOCRACK_PROJ)" \
+			--build-arg HASHCAT_VER="$(HASHCAT_VERSION)" \
+			-t $(ROOT_PROJECT)/build \
+			-f Dockerfile.build.ubuntu $(CURDIR);
 		$(DOCKER_RUN) \
 			-v $(GOCRACK_DIST):/out \
 			-v $(GOCRACK_CODE_LOCAL):/go/src/$(GOCRACK_PROJ) \

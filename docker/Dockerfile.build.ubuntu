@@ -3,6 +3,7 @@ FROM ubuntu:xenial
 ARG USER_ID
 ARG AUTHOR
 ARG GOCRACK_PROJ
+ARG HASHCAT_VER
 
 LABEL AUTHOR=${AUTHOR}
 
@@ -80,5 +81,7 @@ WORKDIR $GOPATH/src/$GOCRACK_PROJ
 
 RUN useradd --non-unique --uid $USER_ID build
 USER build
+
+ENV HASHCAT_VER=$HASHCAT_VER
 
 CMD ["make", "BINDIR=/out"]
