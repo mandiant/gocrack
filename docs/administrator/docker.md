@@ -17,12 +17,12 @@ If you have AMD GPUs and know how to easily create containers, submit a PR!
         -e USER_ID=$(echo "$UID") \
         -p <api port>:<api port> \
         -p <rpc port>:1339 \
-        -v "/var/lib/gocrack_server:/var/lib/gocrack_server" \
+        -v "<local_dir>:/opt/gocrack" \
         gocrack/server
 
 The `-p` parameter exposes a port from the docker container to your host so that the GoCrack API and RPC interface are accessible to remote worker. Change these values to the ports your listeners are running on as defined by the [configuration file](config.md).
 
-The `-v` parameter maps a folder from your host machine `(local:docker_container)` into the container. This is where the server config and all the files are saved. The `docker_container` path should always be `/var/lib/gocrack`
+The `-v` parameter maps a folder from your host machine `(local:docker_container)` into the container. This is where the server config and all the files are saved. The `docker_container` path should always be `/opt/gocrack`
 
 The server's yaml configuration file should reside in the local directory you've mapped into the container as `config.yaml`.
 
@@ -30,7 +30,7 @@ The server's yaml configuration file should reside in the local directory you've
 
     nvidia-docker run -it \
         -e USER_ID=$(echo "$UID") \
-        -v "/var/lib/gocrack_worker:/var/lib/gocrack_worker" \
+        -v "<local_dir>:/opt/gocrack" \
         gocrack/worker
 
 The worker's yaml configuration file should reside in the local directory you've mapped into the container as `config.yaml` along with the directive `server.connect_to` being set to IP of the docker host and `<api port>` that you mapped while creating the server container.
