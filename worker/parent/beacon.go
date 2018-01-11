@@ -9,7 +9,9 @@ import (
 	"github.com/fireeye/gocrack/opencl"
 	"github.com/fireeye/gocrack/server/rpc"
 	"github.com/fireeye/gocrack/server/storage"
+	"github.com/fireeye/gocrack/shared"
 	"github.com/fireeye/gocrack/worker"
+	"github.com/fireeye/gocrack/worker/engines/hashcat"
 
 	"github.com/rs/zerolog/log"
 )
@@ -116,6 +118,9 @@ Loop:
 			Devices:        s.devices,
 			RequestNewTask: s.devices.HasFreeDevices(),
 			Processes:      s.procs.GetBeaconInfo(),
+			Engines: shared.EngineVersion{ // XXX(cschmitt): This should probably be defined automatically
+				"hashcat": hashcat.HashcatVersion,
+			},
 		})
 
 		if err != nil {

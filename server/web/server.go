@@ -133,6 +133,7 @@ func newHTTPServer(cfg Config, s *Server) *http.Server {
 	rootAPIG.Use(s.requestHasValidAuth(), setXSRFTokenIfNecessary(isCSRFEnabled), shared.RecordAPIMetrics(requestDuration, requestCounter))
 	{
 		rootAPIG.GET("/workers/", WrapAPIForError(s.webGetActiveWorkers))
+		rootAPIG.GET("/version/", WrapAPIForError(s.webGetVersion))
 
 		rootAPIG.POST("/task/", WrapAPIForError(s.webCreateTask))
 		rootAPIG.GET("/task/", WrapAPIForError(s.getAvailableTasks))

@@ -13,6 +13,11 @@ import (
 	"github.com/fireeye/gocrack/shared"
 )
 
+var (
+	serverVersion     string
+	serverCompileTime string
+)
+
 type Server struct {
 	stor storage.Backend
 	wmgr *workmgr.WorkerManager
@@ -60,6 +65,12 @@ func NewServer(cfg Config, stor storage.Backend, wmgr *workmgr.WorkerManager, au
 // Start the API server and block
 func (s *Server) Start() error {
 	return s.Serve(s.netl)
+}
+
+// SetVersionInfo sets the server version information
+func SetVersionInfo(revision, ctime string) {
+	serverVersion = revision
+	serverCompileTime = ctime
 }
 
 // Stop the HTTP server gracefully
