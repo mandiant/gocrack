@@ -3,6 +3,7 @@ package web
 import (
 	"context"
 	"crypto/tls"
+	"fmt"
 	"net"
 	"net/http"
 
@@ -37,7 +38,7 @@ func NewServer(cfg Config, stor storage.Backend, wmgr *workmgr.WorkerManager, au
 	if cfg.Listener.UseSSL {
 		tcfg, err := shared.GetTLSConfig(cfg.Listener.Certificate, cfg.Listener.PrivateKey, cfg.Listener.CACertificate)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("Error creating HTTP TLS listener: %s", err)
 		}
 
 		l, err = tls.Listen("tcp", cfg.Listener.Address, tcfg)
