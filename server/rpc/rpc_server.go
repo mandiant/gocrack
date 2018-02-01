@@ -3,6 +3,7 @@ package rpc
 import (
 	"context"
 	"crypto/tls"
+	"fmt"
 	"net"
 	"net/http"
 
@@ -58,7 +59,7 @@ func NewRPCServer(cfg Config, stor storage.Backend, wmgr *workmgr.WorkerManager)
 	if cfg.Listener.UseSSL {
 		tcfg, err := shared.GetTLSConfig(cfg.Listener.Certificate, cfg.Listener.PrivateKey, cfg.Listener.CACertificate)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("Error creating RPC TLS listener: %s", err)
 		}
 
 		// Change a few settings on the TLS config for the listener

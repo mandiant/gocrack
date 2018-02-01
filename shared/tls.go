@@ -4,13 +4,14 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"errors"
+	"fmt"
 )
 
 // GetTLSConfig is a helper function to return a TLS configuration that can be used in TLS servers
 func GetTLSConfig(certificatePem, privateKeyPem string, caCertPem *string) (*tls.Config, error) {
 	cert, err := tls.X509KeyPair([]byte(certificatePem), []byte(privateKeyPem))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to read certificate & private key: %s", err)
 	}
 
 	tcfg := &tls.Config{
