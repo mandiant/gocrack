@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
+	"fmt"
 	"github.com/fireeye/gocrack/server/storage"
 	"github.com/fireeye/gocrack/shared"
 
@@ -51,6 +51,7 @@ type CreateTaskRequest struct {
 	AssignedToDevices *storage.CLDevices        `json:"assigned_devices,omitempty"`
 	Comment           *string                   `json:"comment,omitempty"`
 	EnginePayload     json.RawMessage           `json:"payload"` // The structure of EnginePayload differs based on Engine
+	TaskDuration      int                        `json:"task_duration"`
 	Priority          *storage.WorkerPriority   `json:"priority,omitempty"`
 	AdditionalUsers   *[]string                 `json:"additional_users,omitempty"`
 }
@@ -87,6 +88,7 @@ type TaskInfoResponseItem struct {
 	FileID            string               `json:"-"` // FileID is a reference to TaskFile via TaskFile.FileID
 	Priority          TaskPriorityFancy    `json:"priority"`
 	EnginePayload     interface{}          `json:"engine_options"`
+	TaskDuration      int                   `json:"task_duration"`
 	FileInfo          *TaskFileItem        `json:"password_file"`
 	Error             *string              `json:"error,omitempty"`
 }
@@ -242,6 +244,7 @@ func (s *Server) webCreateTask(c *gin.Context) *WebAPIError {
 		CreatedByUUID: claim.UserUUID,
 		LastUpdatedAt: now,
 		Engine:        request.Engine,
+		TaskDuration:  request.TaskDuration,
 		EnginePayload: payload,
 		FileID:        tf.FileID,
 		CaseCode:      request.CaseCode,

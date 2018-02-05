@@ -169,6 +169,7 @@ type Task struct {
 	CreatedBy         string
 	CreatedByUUID     string // CreatedBy is a reference to User via User.UserUUID
 	CreatedAt         time.Time
+	TaskDuration      int
 	LastUpdatedAt     time.Time
 	AssignedToHost    string
 	AssignedToDevices *CLDevices
