@@ -75,9 +75,6 @@ func convertTaskFromMap(task *storage.Task) error {
 		return errors.New("expected t to be map[string]interface{}")
 	}
 
-	print("In convert task from map")
-	print(task.TaskDuration)
-	print ("\n")
 	b, err := json.Marshal(task.EnginePayload)
 	if err != nil {
 		return err

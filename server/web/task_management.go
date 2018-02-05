@@ -7,7 +7,6 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	"fmt"
 	"github.com/fireeye/gocrack/server/storage"
 	"github.com/fireeye/gocrack/shared"
 
