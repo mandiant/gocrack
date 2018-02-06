@@ -54,16 +54,16 @@ func (s *Worker) Start() error {
 	}()
 
 	s.t = NewTask(s.taskid, s.devices, s.cfg, s.rc) //Get the task in order to collect the task duration
-	resp, err:= s.t.c.GetTask(rpc.RequestTaskPayload{
-                TaskID: s.t.taskid,
-        })
-	if resp.TaskDuration !=0{ //If the task duration is 0 (not set), we don't run the timer
+	resp, err:= s.t.c.GetTask(rpc.RequestTaskPayload {
+		TaskID: s.t.taskid,
+	})
+	if resp.TaskDuration !=0 { //If the task duration is 0 (not set), we don't run the timer
 		timer := time.NewTimer(time.Second * time.Duration(resp.TaskDuration))
 		go func() {
 			<-timer.C
 			log.Warn().Msg("Timer expired, stopping task")
 			s.t.Stop()
-			}()
+		}()
 	}
 
 	if err := s.t.Start(); err != nil {

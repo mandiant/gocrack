@@ -3,7 +3,7 @@ package bdb
 import "github.com/fireeye/gocrack/server/storage"
 
 const (
-	curCrackTaskVer      float32 = 1.0
+	curCrackTaskVer      float32 = 1.1
 	curUserVer           float32 = 1.0
 	curEntVer            float32 = 1.0
 	curTaskFileVer       float32 = 1.0
