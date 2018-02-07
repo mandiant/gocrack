@@ -5,6 +5,7 @@ type ModifiableTaskRequest struct {
 	AssignedToHost    *string
 	AssignedToDevices *CLDevices
 	Status            *TaskStatus
+	TaskDuration      *int
 }
 
 // UserModifyRequest contains the fields in `User` that are allowed to be modified

@@ -362,6 +362,10 @@ func (s *BoltBackend) UpdateTask(taskid string, modifiedFields storage.Modifiabl
 		tmp.Status = *modifiedFields.Status
 	}
 
+	if modifiedFields.TaskDuration != nil {
+		tmp.TaskDuration = *modifiedFields.TaskDuration
+	}
+
 	if err = txn.Update(&tmp); err != nil {
 		return convertErr(err)
 	}
