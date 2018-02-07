@@ -1,5 +1,11 @@
 ---
 language: go
+
+env:
+  - CGO_CFLAGS="-I/home/travis/hashcat/deps/OpenCL-Headers -I/home/travis/hashcat/include"
+  - CGO_LDFLAGS="-L/home/travis/hashcat"
+  - LD_LIBRARY_PATH="/home/travis/hashcat:$LD_LIBRARY_PATH"
+
 addons:
  apt:
   packages:
@@ -12,4 +18,4 @@ go:
   - 1.9.x
 
 script:
-  - CGO_CFLAGS="-I/home/travis/hashcat/deps/OpenCL-Headers -I/home/travis/hashcat/include" CGO_LDFLAGS="-L/home/travis/hashcat" make test
+  - make test
