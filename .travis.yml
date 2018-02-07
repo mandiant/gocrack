@@ -21,4 +21,7 @@ go:
   - tip
 
 script:
-  - make test
+  - ./misc/codecov_tests.sh
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
