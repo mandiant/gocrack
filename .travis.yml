@@ -1,5 +1,9 @@
 ---
 language: go
+addons:
+ apt:
+  packages:
+    - ocl-icd-opencl-dev
 
 before_install:
   - ./setup_travis.sh
