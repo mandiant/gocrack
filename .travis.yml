@@ -5,7 +5,7 @@ before_install:
   - ./setup_travis.sh
 
 go:
-  - 1.9.x∂
+  - 1.9.x
 
 script:
   - make test
