@@ -1,6 +1,6 @@
 # gocrack
 
-[![Build Status](https://travis-ci.org/fireeye/gocrack.svg?branch=master)](https://travis-ci.org/fireeye/gocrack)
+[![Build Status](https://travis-ci.org/fireeye/gocrack.svg?branch=master)](https://travis-ci.org/fireeye/gocrack) [![codecov](https://codecov.io/gh/fireeye/gocrack/branch/master/graph/badge.svg)](https://codecov.io/gh/fireeye/gocrack)
 
 ![GoCrack Logo](/docs/logo.png)
 

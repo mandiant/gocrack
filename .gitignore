@@ -2,3 +2,4 @@ builds/
 **.out
 .vscode/
 configs/
+coverage.txt
