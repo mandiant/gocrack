@@ -1,5 +1,6 @@
 ---
 language: go
+sudo: enabled
 
 before_install:
   - ./setup_travis.sh
@@ -8,4 +9,4 @@ go:
   - 1.9.x
 
 script:
-  - make test
+  - CGO_CFLAGS="-I/home/travis/hashcat/deps/OpenCL-Headers/CL -I/home/travis/hashcat/include" CGO_LDFLAGS="-L/home/travis/hashcat" make test
