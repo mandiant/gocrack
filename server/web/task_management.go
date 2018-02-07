@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
 	"github.com/fireeye/gocrack/server/storage"
 	"github.com/fireeye/gocrack/shared"
 
@@ -50,7 +51,7 @@ type CreateTaskRequest struct {
 	AssignedToDevices *storage.CLDevices        `json:"assigned_devices,omitempty"`
 	Comment           *string                   `json:"comment,omitempty"`
 	EnginePayload     json.RawMessage           `json:"payload"` // The structure of EnginePayload differs based on Engine
-	TaskDuration      int                        `json:"task_duration"`
+	TaskDuration      int                       `json:"task_duration"`
 	Priority          *storage.WorkerPriority   `json:"priority,omitempty"`
 	AdditionalUsers   *[]string                 `json:"additional_users,omitempty"`
 }
@@ -87,7 +88,7 @@ type TaskInfoResponseItem struct {
 	FileID            string               `json:"-"` // FileID is a reference to TaskFile via TaskFile.FileID
 	Priority          TaskPriorityFancy    `json:"priority"`
 	EnginePayload     interface{}          `json:"engine_options"`
-	TaskDuration      int                   `json:"task_duration"`
+	TaskDuration      int                  `json:"task_duration"`
 	FileInfo          *TaskFileItem        `json:"password_file"`
 	Error             *string              `json:"error,omitempty"`
 }
@@ -128,6 +129,7 @@ type ModifyTaskRequest struct {
 	AssignedToHost    *string             `json:"assigned_host,omitempty"`
 	AssignedToDevices *storage.CLDevices  `json:"assigned_devices,omitempty"`
 	Status            *storage.TaskStatus `json:"task_status,omitempty"`
+	TaskDuration      *int                `json:"task_duration,omitempty"`
 }
 
 // HashcatTaskPayload defines the structure of a Task request which should be executed in a worker with the hashcat engine
@@ -581,13 +583,10 @@ func (s *Server) webChangeTaskStatus(c *gin.Context) *WebAPIError {
 }
 
 func (s *Server) webModifyTask(c *gin.Context) *WebAPIError {
-	var (
-		taskid  = c.Param("taskid")
-		err     error
-		request ModifyTaskRequest
-	)
+	var taskid = c.Param("taskid")
+	var request ModifyTaskRequest
 
-	if err = c.BindJSON(&request); err != nil {
+	if err := c.BindJSON(&request); err != nil {
 		return &WebAPIError{
 			StatusCode: http.StatusBadRequest,
 			Err:        err,
@@ -602,7 +601,7 @@ func (s *Server) webModifyTask(c *gin.Context) *WebAPIError {
 		request.Status = nil
 	}
 
-	if err = s.stor.UpdateTask(taskid, storage.ModifiableTaskRequest(request)); err != nil {
+	if err := s.stor.UpdateTask(taskid, storage.ModifiableTaskRequest(request)); err != nil {
 		if err == storage.ErrNotFound {
 			return &WebAPIError{
 				StatusCode: http.StatusNotFound,
