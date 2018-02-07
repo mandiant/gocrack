@@ -26,6 +26,7 @@ func convertStorageTaskToItem(stor storage.Backend, t storage.Task) TaskInfoResp
 		AssignedToHost:    t.AssignedToHost,
 		AssignedToDevices: t.AssignedToDevices,
 		Status:            t.Status,
+		TaskDuration:      t.TaskDuration,
 		CreatedBy:         t.CreatedBy,
 		CreatedByUUID:     t.CreatedByUUID,
 		CreatedAt:         t.CreatedAt,
@@ -34,7 +35,6 @@ func convertStorageTaskToItem(stor storage.Backend, t storage.Task) TaskInfoResp
 		Priority:          TaskPriorityFancy(t.Priority),
 		Error:             t.Error,
 	}
-
 	switch ep := t.EnginePayload.(type) {
 	case shared.HashcatUserOptions:
 		hcitem := HashcatEnginePayload{}

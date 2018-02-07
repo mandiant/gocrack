@@ -36,6 +36,7 @@ type NewTaskPayloadResponse struct {
 	Engine        storage.WorkerCrackEngine
 	Priority      storage.WorkerPriority
 	EnginePayload json.RawMessage
+	TaskDuration  int
 }
 
 type TaskFileGetRequest struct {
@@ -114,13 +115,13 @@ func (s *RPCServer) getTaskPayload(c *gin.Context) *RPCError {
 			Err:        err,
 		}
 	}
-
 	c.JSON(http.StatusOK, &NewTaskPayloadResponse{
 		TaskID:        task.TaskID,
 		FileID:        task.FileID,
 		Engine:        task.Engine,
 		EnginePayload: engineBytes,
 		Priority:      task.Priority,
+		TaskDuration:  task.TaskDuration,
 	})
 
 	c.JSON(http.StatusOK, task)

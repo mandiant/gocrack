@@ -71,7 +71,6 @@ func convertTaskFromMap(task *storage.Task) error {
 	if task.EnginePayload == nil {
 		return nil
 	}
-
 	if _, ok := task.EnginePayload.(map[string]interface{}); !ok {
 		return errors.New("expected t to be map[string]interface{}")
 	}
@@ -80,7 +79,6 @@ func convertTaskFromMap(task *storage.Task) error {
 	if err != nil {
 		return err
 	}
-
 	switch task.Engine {
 	case storage.WorkerHashcatEngine:
 		var hcp shared.HashcatUserOptions
