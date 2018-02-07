@@ -1,5 +1,7 @@
 # gocrack
 
+[![Build Status](https://travis-ci.org/fireeye/gocrack.svg?branch=master)](https://travis-ci.org/fireeye/gocrack)
+
 ![GoCrack Logo](/docs/logo.png)
 
 GoCrack provides APIs to manage password cracking tasks across supported cracking engines.

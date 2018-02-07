@@ -18,6 +18,7 @@ before_install:
 
 go:
   - 1.9.x
+  - tip
 
 script:
   - make test
