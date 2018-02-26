@@ -55,7 +55,7 @@ RUN set -eux; \
 	fi; \
 	\
 	export PATH="/usr/local/go/bin:$PATH"; \
-go version
+	go version
 
 RUN echo "/usr/local/cuda/lib64" >> /etc/ld.so.conf.d/cuda.conf && \
     ldconfig
