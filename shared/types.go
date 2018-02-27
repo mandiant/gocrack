@@ -103,7 +103,7 @@ func GetBoolPtr(b bool) *bool {
 	return &b
 }
 
-// IntSliceToString converts a list of integers to a comma seperated list
+// IntSliceToString converts a list of integers to a comma separated list
 func IntSliceToString(ints []int) string {
 	tmp := make([]string, len(ints))
 	for i, v := range ints {

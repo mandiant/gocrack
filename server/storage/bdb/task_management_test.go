@@ -116,7 +116,7 @@ func TestTaskManagementGetNextTaskForHost(t *testing.T) {
 		// use this machine and devices 4 & 5
 		{
 			Tasks: []storage.Task{
-				storage.Task{
+				{
 					FileID:            uuid.NewV4().String(),
 					TaskID:            uuid.NewV4().String(),
 					TaskName:          "Testing",
@@ -138,7 +138,7 @@ func TestTaskManagementGetNextTaskForHost(t *testing.T) {
 		// and the next task in-line uses devices 4 & 5
 		{
 			Tasks: []storage.Task{
-				storage.Task{
+				{
 					FileID:            uuid.NewV4().String(),
 					TaskID:            uuid.NewV4().String(),
 					TaskName:          "Testing",
@@ -159,7 +159,7 @@ func TestTaskManagementGetNextTaskForHost(t *testing.T) {
 		// Expecting the task to successfully return because we arent looking for a specific host match
 		{
 			Tasks: []storage.Task{
-				storage.Task{
+				{
 					FileID:            uuid.NewV4().String(),
 					TaskID:            uuid.NewV4().String(),
 					TaskName:          "Testing",
@@ -179,7 +179,7 @@ func TestTaskManagementGetNextTaskForHost(t *testing.T) {
 		// Expecting the first one to return in the list as it was created before the second
 		{
 			Tasks: []storage.Task{
-				storage.Task{
+				{
 					FileID:        uuid.NewV4().String(),
 					TaskID:        uuid.NewV4().String(),
 					TaskName:      "Testing",
@@ -188,7 +188,7 @@ func TestTaskManagementGetNextTaskForHost(t *testing.T) {
 					CreatedByUUID: uuid.NewV4().String(),
 					CreatedAt:     time.Now().UTC().Add(-time.Duration(time.Hour * 4)),
 				},
-				storage.Task{
+				{
 					FileID:        uuid.NewV4().String(),
 					TaskID:        uuid.NewV4().String(),
 					TaskName:      "Testing2",
@@ -207,7 +207,7 @@ func TestTaskManagementGetNextTaskForHost(t *testing.T) {
 		// Not expecting anything to be returned as this task has "completed"
 		{
 			Tasks: []storage.Task{
-				storage.Task{
+				{
 					FileID:        uuid.NewV4().String(),
 					TaskID:        uuid.NewV4().String(),
 					TaskName:      "Testing",
@@ -224,7 +224,7 @@ func TestTaskManagementGetNextTaskForHost(t *testing.T) {
 		// Expecting the 2nd one to return first due to its priority even though it was created after the 1st one
 		{
 			Tasks: []storage.Task{
-				storage.Task{
+				{
 					FileID:        uuid.NewV4().String(),
 					TaskID:        uuid.NewV4().String(),
 					TaskName:      "Testing",
@@ -234,7 +234,7 @@ func TestTaskManagementGetNextTaskForHost(t *testing.T) {
 					CreatedAt:     time.Now().UTC().Add(-time.Duration(time.Hour * 4)),
 					Priority:      storage.WorkerPriorityNormal,
 				},
-				storage.Task{
+				{
 					FileID:        uuid.NewV4().String(),
 					TaskID:        uuid.NewV4().String(),
 					TaskName:      "Testing2",
@@ -269,7 +269,7 @@ func TestTaskManagementGetNextTaskForHost(t *testing.T) {
 		}
 
 		if err := txn.Commit(); err != nil {
-			assert.Fail(t, fmt.Sprintf("unexpected error comitting txn in test %d", i), err.Error())
+			assert.Fail(t, fmt.Sprintf("unexpected error committing txn in test %d", i), err.Error())
 			goto CleanupTestIteration
 		}
 
@@ -306,7 +306,7 @@ func TestTaskManagementProperlyQueueingTasks(t *testing.T) {
 
 	firstTaskID := uuid.NewV4().String()
 	tasks := []storage.Task{
-		storage.Task{
+		{
 			FileID:            uuid.NewV4().String(),
 			TaskID:            firstTaskID,
 			TaskName:          "Testing",
@@ -317,7 +317,7 @@ func TestTaskManagementProperlyQueueingTasks(t *testing.T) {
 			AssignedToHost:    "my-hostname",
 			AssignedToDevices: &storage.CLDevices{4, 5},
 		},
-		storage.Task{
+		{
 			FileID:            uuid.NewV4().String(),
 			TaskID:            uuid.NewV4().String(),
 			TaskName:          "Testing 2",

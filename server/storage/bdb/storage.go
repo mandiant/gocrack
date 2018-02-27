@@ -55,7 +55,7 @@ func (s *BoltBackend) checkSchema() error {
 				return err
 			}
 			opt = CurrentStorageVersion
-			err = nil
+			return nil
 		}
 	}
 	// XXX(cschmitt): What do if version changes?

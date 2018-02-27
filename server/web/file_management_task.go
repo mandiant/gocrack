@@ -76,7 +76,7 @@ func getFileFromContext(c *gin.Context) (f io.ReadCloser, filename string, e *We
 	var err error
 
 	contentType := strings.ToLower(c.Request.Header.Get("Content-Type"))
-	// seperate the content-type for multi-part
+	// separate the content-type for multi-part
 	contentTypeSep := strings.Index(contentType, ";")
 	if contentTypeSep != -1 {
 		contentType = contentType[:contentTypeSep]

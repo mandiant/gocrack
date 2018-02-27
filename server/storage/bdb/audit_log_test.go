@@ -5,10 +5,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/fireeye/gocrack/server/storage"
 
 	uuid "github.com/satori/go.uuid"
-	"github.com/fireeye/gocrack/server/storage"
+	"github.com/stretchr/testify/assert"
 )
 
 func generateRandomAuditEntry(entID string, userID string) storage.ActivityLogEntry {

@@ -52,7 +52,7 @@ func grantEntitlement(node storm.Node, user storage.User, entitledTo interface{}
 		UniqueID:   fmt.Sprintf("%x", md5.New().Sum([]byte(fmt.Sprintf("%s_%s", user.UserUUID, entitledID)))),
 		DocVersion: curEntVer,
 	}); err != nil {
-		// If they are already entitled, do not unnecessairly create another record
+		// If they are already entitled, do not unnecessarily create another record
 		if err == storm.ErrAlreadyExists {
 			return nil
 		}
