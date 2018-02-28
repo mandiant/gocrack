@@ -12,7 +12,7 @@ import (
 )
 
 func init() {
-	// Supress the gin out while testing
+	// Suppress the gin out while testing
 	gin.SetMode(gin.ReleaseMode)
 }
 

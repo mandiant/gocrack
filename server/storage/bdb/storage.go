@@ -1,8 +1,10 @@
 package bdb
 
 import (
-	"github.com/asdine/storm"
 	"github.com/fireeye/gocrack/server/storage"
+
+	"github.com/asdine/storm"
+	"github.com/prometheus/client_golang/prometheus"
 )
 
 // CurrentStorageVersion describes what storage version we're on and can be used to determine
@@ -38,6 +40,11 @@ func Init(cfg storage.Config) (storage.Backend, error) {
 	if err = bb.checkSchema(); err != nil {
 		return nil, err
 	}
+
+	exporter := NewExporter(db)
+	// this should never panic..
+	prometheus.MustRegister(exporter)
+
 	return bb, nil
 }
 
