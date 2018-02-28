@@ -53,12 +53,24 @@ var metrics = map[string]*gauges{
 		help:      "Total number of node dereferences",
 		subsystem: "tx",
 	},
+	"rebalances_total": {
+		help:      "Total number of node rebalances",
+		subsystem: "tx",
+	},
+	"rebalances_time_seconds": {
+		help:      "Total number of seconds spent rebalancing nodes",
+		subsystem: "tx",
+	},
 	"split_count_total": {
 		help:      "Total number of nodes split",
 		subsystem: "tx",
 	},
 	"spill_count_total": {
 		help:      "Total number of nodes spilled",
+		subsystem: "tx",
+	},
+	"spill_time_seconds": {
+		help:      "Total number of seconds spent spilling nodes",
 		subsystem: "tx",
 	},
 	"writes_total": {
@@ -118,8 +130,11 @@ func (s *StatsExporter) updateMetrics() {
 	s.gauges["cursor_count_total"].Set(float64(globalStats.TxStats.CursorCount))
 	s.gauges["node_count_total"].Set(float64(globalStats.TxStats.NodeCount))
 	s.gauges["node_deref_total"].Set(float64(globalStats.TxStats.NodeDeref))
+	s.gauges["rebalances_total"].Set(float64(globalStats.TxStats.Rebalance))
+	s.gauges["rebalances_time_seconds"].Set(globalStats.TxStats.RebalanceTime.Seconds())
 	s.gauges["split_count_total"].Set(float64(globalStats.TxStats.Split))
 	s.gauges["spill_count_total"].Set(float64(globalStats.TxStats.Spill))
+	s.gauges["spill_time_seconds"].Set(globalStats.TxStats.SpillTime.Seconds())
 	s.gauges["writes_total"].Set(float64(globalStats.TxStats.Write))
 	s.gauges["write_time_seconds"].Set(globalStats.TxStats.WriteTime.Seconds())
 }
