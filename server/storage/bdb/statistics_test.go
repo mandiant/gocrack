@@ -10,6 +10,8 @@ import (
 
 func TestBDBStatsExporter(t *testing.T) {
 	db := initTest(t)
+	defer db.Close()
+
 	exporter := NewExporter(db.BoltBackend.db)
 
 	metrics := make([]prometheus.Metric, 0)
