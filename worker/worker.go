@@ -9,6 +9,7 @@ var (
 	CompileRev string
 )
 
+// WorkerImpl describes the core functionality that the parent and child components must implement.
 type WorkerImpl interface {
 	Start() error
 	Stop() error
