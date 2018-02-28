@@ -22,7 +22,7 @@ func (s *Server) webDeleteTask(c *gin.Context) *WebAPIError {
 		}
 
 		return &WebAPIError{
-			UserError:  "An error occured while trying to delete your task",
+			UserError:  "An error occurred while trying to delete your task",
 			StatusCode: http.StatusInternalServerError,
 			Err:        err,
 		}
@@ -30,7 +30,7 @@ func (s *Server) webDeleteTask(c *gin.Context) *WebAPIError {
 
 	if err := s.stor.RemoveEntitlements(taskid, storage.EntitlementTask); err != nil {
 		return &WebAPIError{
-			UserError:  "An error occured while trying to delete your task",
+			UserError:  "An error occurred while trying to delete your task",
 			StatusCode: http.StatusInternalServerError,
 			Err:        fmt.Errorf("failed to clear entitlement entries for %s: %v", taskid, err),
 		}
@@ -38,7 +38,7 @@ func (s *Server) webDeleteTask(c *gin.Context) *WebAPIError {
 
 	if err := s.stor.RemoveActivityEntries(taskid); err != nil {
 		return &WebAPIError{
-			UserError:  "An error occured while trying to delete your task",
+			UserError:  "An error occurred while trying to delete your task",
 			StatusCode: http.StatusInternalServerError,
 			Err:        fmt.Errorf("failed to clear activity entries for %s: %v", taskid, err),
 		}

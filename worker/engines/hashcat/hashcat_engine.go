@@ -18,8 +18,11 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+// HashcatVersion contains the version of hashcat linked into the worker binary.
+// It is set via a linkerflag
 var HashcatVersion string
 
+// HashcatEngine implements engines.EngineImpl with Hashcat as the password cracker.
 type HashcatEngine struct {
 	TaskID            string
 	HashcatSharedPath string

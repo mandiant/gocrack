@@ -3,8 +3,8 @@ package shared
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/fireeye/gocrack/opencl"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestDeviceMap(t *testing.T) {
