@@ -1,8 +1,6 @@
 package authentication
 
-import (
-	"unicode"
-)
+import "unicode"
 
 // CheckPasswordRequirement ensures the password meets sane requirements of 8+ characters, at least one number,
 // one special character, and both an upper and lowercase letter

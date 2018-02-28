@@ -76,6 +76,7 @@ type TaskProcess struct {
 	UsingDevices []int
 }
 
+// EngineVersion is a map of the engines contained within the worker along with their engine version
 type EngineVersion map[string]string // map[engine_name]engine_version
 
 // Beacon describes the payload sent by a worker

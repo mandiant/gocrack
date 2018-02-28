@@ -32,10 +32,7 @@ func (s *gzReader) Close() error {
 		return err
 	}
 
-	if err := s.gz.Close(); err != nil {
-		return err
-	}
-	return nil
+	return s.gz.Close()
 }
 
 func (s *gzReader) Read(p []byte) (int, error) {

@@ -31,6 +31,7 @@ type Task struct {
 	impl    engines.EngineImpl
 }
 
+// NewTask creates a new password cracking task to execute inside this process
 func NewTask(taskid string, devices []int, cfg *worker.Config, c rpc.GoCrackRPC) *Task {
 	return &Task{
 		taskid:  taskid,
@@ -59,6 +60,7 @@ func (t *Task) DownloadFile(fileid string, filetype rpc.FileType) (string, error
 	if err != nil {
 		return "", err
 	}
+
 	defer func() {
 		fpLock.Unlock()
 		log.Debug().

@@ -14,8 +14,10 @@ func init() {
 	authentication.Register("database", &DatabaseAuthPlugin{})
 }
 
+// DatabaseAuthPlugin implements Open which is used to register the GoCrack database authentication provider with the backend
 type DatabaseAuthPlugin struct{}
 
+// Open initializes the GoCrack database Authentication Provider
 func (s *DatabaseAuthPlugin) Open(db authentication.AuthStorageBackend, cfg authentication.PluginSettings) (authentication.AuthAPI, error) {
 	return Init(db, cfg)
 }
@@ -132,6 +134,7 @@ func (s *DatabaseAuth) UserCanChangePassword() bool {
 	return true
 }
 
+// CanUsersRegister indicates if the GoCrack administrator has allowed new user registration
 func (s *DatabaseAuth) CanUsersRegister() bool {
 	return s.cfg.AllowRegistration
 }

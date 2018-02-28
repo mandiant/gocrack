@@ -19,17 +19,23 @@ func init() {
 	authentication.Register("ldap", &LDAPAuthPlugin{})
 }
 
+// LDAPAuthPlugin implements Open which is used to register the LDAP provider with the backend
 type LDAPAuthPlugin struct{}
 
+// Open initializes the LDAP Authentication Provider
 func (s *LDAPAuthPlugin) Open(db authentication.AuthStorageBackend, cfg authentication.PluginSettings) (authentication.AuthAPI, error) {
 	return Init(db, cfg)
 }
 
 var (
+	// ErrUserNotFound indicates the user was not found in the authentication backend
 	ErrUserNotFound = errors.New("user not found")
-	ErrMoreThanOne  = errors.New("more than one record has been found")
-	ErrInvalidCert  = errors.New("invalid root ca cert")
-	ErrDisabled     = errors.New("disabled in ldap authentication")
+	// ErrMoreThanOne is returned whenever more than one AD record was returned as we cant properly distinguish which record we should use
+	ErrMoreThanOne = errors.New("more than one record has been found")
+	// ErrInvalidCert is returned whenever the CA cert was given to us for use in the LDAP provider but is invalid
+	ErrInvalidCert = errors.New("invalid root ca cert")
+	// ErrDisabled is returned when a function is called that is not supported by the LDAP provider
+	ErrDisabled = errors.New("disabled in ldap authentication")
 )
 
 func checkForString(in map[string]interface{}, expectedToHave string) (string, error) {

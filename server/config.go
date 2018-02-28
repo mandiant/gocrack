@@ -48,8 +48,5 @@ func (s *Config) validate() error {
 		return err
 	}
 
-	if err := s.Notification.Validate(); err != nil {
-		return err
-	}
-	return nil
+	return s.Notification.Validate()
 }
