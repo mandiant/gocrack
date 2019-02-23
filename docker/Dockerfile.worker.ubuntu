@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM nvidia/opencl:runtime-ubuntu18.04
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         ocl-icd-opencl-dev && \
@@ -9,22 +9,5 @@ COPY dist/hashcat/bin/hashcat /usr/local/bin
 COPY dist/hashcat/lib/libhashcat.so /usr/local/lib
 COPY dist/hashcat/share /usr/local/share
 COPY files/worker_entrypoint.sh /usr/local/bin/entrypoint.sh
-
-# nvidia-docker 1.0
-LABEL com.nvidia.volumes.needed="nvidia_driver"
-
-RUN echo "/usr/local/cuda/lib64" >> /etc/ld.so.conf.d/cuda.conf && \
-    ldconfig
-
-RUN echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf && \
-    echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf
-
-ENV PATH /usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}
-ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
-
-RUN mkdir -p /etc/OpenCL/vendors && \
-    echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
-
-RUN ldconfig
 
 ENTRYPOINT [ "bash", "/usr/local/bin/entrypoint.sh" ]
