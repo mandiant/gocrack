@@ -17,7 +17,7 @@ before_install:
   - ./misc/setup_travis.sh
 
 go:
-  - "1.10.x"
+  - "1.12.x"
   - tip
 
 script:
