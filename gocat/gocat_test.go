@@ -9,7 +9,7 @@ import (
 
 	"github.com/fireeye/gocrack/gocat/hcargp"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 const (
@@ -63,13 +63,14 @@ func TestOptionsExecPath(t *testing.T) {
 	}
 
 	err := opts.validate()
-	assert.Nil(t, err)
-	assert.True(t, strings.HasSuffix(opts.ExecutablePath, "_test"))
+	require.Nil(t, err)
+	fmt.Println(opts.ExecutablePath)
+	require.True(t, strings.HasSuffix(opts.ExecutablePath, "test"))
 
 	// Not valid because executable path was incorrectly set by the user
 	opts.ExecutablePath = "/nope"
 	err = opts.validate()
-	assert.Error(t, err)
+	require.Error(t, err)
 }
 
 func TestGoCatOptionsValidatorErrors(t *testing.T) {
@@ -92,7 +93,7 @@ func TestGoCatOptionsValidatorErrors(t *testing.T) {
 		},
 	} {
 		err := test.opts.validate()
-		assert.Equal(t, test.expectedError, err)
+		require.Equal(t, test.expectedError, err)
 	}
 }
 
@@ -104,13 +105,13 @@ func TestGoCatCrackingMD5(t *testing.T) {
 	}, callbackForTests(crackedHashes))
 	defer hc.Free()
 
-	assert.NotNil(t, hc)
-	assert.NoError(t, err)
+	require.NotNil(t, hc)
+	require.NoError(t, err)
 
 	err = hc.RunJob("-a", "0", "-m", "0", "--potfile-disable", "5d41402abc4b2a76b9719d911017c592", "./testdata/test_dictionary.txt")
-	assert.NoError(t, err)
-	assert.Len(t, crackedHashes, 1)
-	assert.Equal(t, "hello", *crackedHashes["5d41402abc4b2a76b9719d911017c592"])
+	require.NoError(t, err)
+	require.Len(t, crackedHashes, 1)
+	require.Equal(t, "hello", *crackedHashes["5d41402abc4b2a76b9719d911017c592"])
 }
 
 func TestGoCatReusingContext(t *testing.T) {
@@ -121,18 +122,18 @@ func TestGoCatReusingContext(t *testing.T) {
 	}, callbackForTests(crackedHashes))
 	defer hc.Free()
 
-	assert.NotNil(t, hc)
-	assert.NoError(t, err)
+	require.NotNil(t, hc)
+	require.NoError(t, err)
 
 	err = hc.RunJob("-a", "0", "-m", "0", "--potfile-disable", "5d41402abc4b2a76b9719d911017c592", "./testdata/test_dictionary.txt")
-	assert.NoError(t, err)
-	assert.Len(t, crackedHashes, 1)
-	assert.Equal(t, "hello", *crackedHashes["5d41402abc4b2a76b9719d911017c592"])
+	require.NoError(t, err)
+	require.Len(t, crackedHashes, 1)
+	require.Equal(t, "hello", *crackedHashes["5d41402abc4b2a76b9719d911017c592"])
 
 	err = hc.RunJob("-a", "0", "-m", "0", "--potfile-disable", "9f9d51bc70ef21ca5c14f307980a29d8", "./testdata/test_dictionary.txt")
-	assert.NoError(t, err)
-	assert.Len(t, crackedHashes, 2) // the previous run will still exist in this map
-	assert.Equal(t, "bob", *crackedHashes["9f9d51bc70ef21ca5c14f307980a29d8"])
+	require.NoError(t, err)
+	require.Len(t, crackedHashes, 2) // the previous run will still exist in this map
+	require.Equal(t, "bob", *crackedHashes["9f9d51bc70ef21ca5c14f307980a29d8"])
 }
 
 func TestGoCatRunJobWithOptions(t *testing.T) {
@@ -143,8 +144,8 @@ func TestGoCatRunJobWithOptions(t *testing.T) {
 	}, callbackForTests(crackedHashes))
 	defer hc.Free()
 
-	assert.NotNil(t, hc)
-	assert.NoError(t, err)
+	require.NotNil(t, hc)
+	require.NoError(t, err)
 
 	err = hc.RunJobWithOptions(hcargp.HashcatSessionOptions{
 		AttackMode:                   hcargp.GetIntPtr(0),
@@ -154,9 +155,9 @@ func TestGoCatRunJobWithOptions(t *testing.T) {
 		DictionaryMaskDirectoryInput: hcargp.GetStringPtr("./testdata/test_dictionary.txt"),
 	})
 
-	assert.NoError(t, err)
-	assert.Len(t, crackedHashes, 1) // the previous run will still exist in this map
-	assert.Equal(t, "bob", *crackedHashes["9f9d51bc70ef21ca5c14f307980a29d8"])
+	require.NoError(t, err)
+	require.Len(t, crackedHashes, 1) // the previous run will still exist in this map
+	require.Equal(t, "bob", *crackedHashes["9f9d51bc70ef21ca5c14f307980a29d8"])
 }
 
 func TestGocatRussianHashes(t *testing.T) {
@@ -167,8 +168,8 @@ func TestGocatRussianHashes(t *testing.T) {
 	}, callbackForTests(crackedHashes))
 	defer hc.Free()
 
-	assert.NotNil(t, hc)
-	assert.NoError(t, err)
+	require.NotNil(t, hc)
+	require.NoError(t, err)
 
 	err = hc.RunJobWithOptions(hcargp.HashcatSessionOptions{
 		AttackMode:                   hcargp.GetIntPtr(0),
@@ -178,8 +179,8 @@ func TestGocatRussianHashes(t *testing.T) {
 		DictionaryMaskDirectoryInput: hcargp.GetStringPtr("./testdata/russian_test.dictionary"),
 	})
 
-	assert.NoError(t, err)
-	assert.Len(t, crackedHashes, 4) // the previous run will still exist in this map
+	require.NoError(t, err)
+	require.Len(t, crackedHashes, 4) // the previous run will still exist in this map
 	fmt.Println("HI", crackedHashes)
 	fmt.Println(crackedHashes)
 }
@@ -190,15 +191,14 @@ func TestGoCatStopAtCheckpointWithNoRunningSession(t *testing.T) {
 	}, emptyCallback)
 	defer hc.Free()
 
-	assert.NotNil(t, hc)
-	assert.NoError(t, err)
+	require.NotNil(t, hc)
+	require.NoError(t, err)
 
 	err = hc.StopAtCheckpoint()
-	assert.Equal(t, ErrUnableToStopAtCheckpoint, err)
+	require.Equal(t, ErrUnableToStopAtCheckpoint, err)
 }
 
-func ExampleHashcat_RunJobWithOptions() {
-
+func TestExampleHashcat_RunJobWithOptions(t *testing.T) {
 	eventCallback := func(hc unsafe.Pointer, payload interface{}) {
 		switch pl := payload.(type) {
 		case LogPayload:
@@ -237,7 +237,8 @@ func ExampleHashcat_RunJobWithOptions() {
 		AttackMode:                   hcargp.GetIntPtr(0),
 		HashType:                     hcargp.GetIntPtr(0),
 		PotfileDisable:               hcargp.GetBoolPtr(true),
-		InputFile:                    "9f9d51bc70ef21ca5c14f307980a29d8",
+		OptimizedKernelEnabled: 	  hcargp.GetBoolPtr(true),
+		InputFile:                    "9f9d51bc70ef21ca5c14d307980a29d2",
 		DictionaryMaskDirectoryInput: hcargp.GetStringPtr("./testdata/test_dictionary.txt"),
 	})
 

@@ -89,7 +89,7 @@ func validatorCallback(id uint32, hcCtx *C.hashcat_ctx_t, results unsafe.Pointer
 	switch id {
 	case C.EVENT_LOG_WARNING:
 		ectx := hcCtx.event_ctx
-		msg := C.GoStringN(&ectx.msg_buf[0], ectx.msg_len)
+		msg := C.GoStringN(&ectx.msg_buf[0], C.int(ectx.msg_len))
 		if strings.Contains(msg, "kernel not found") || strings.Contains(msg, "falling back to") {
 			return
 		}

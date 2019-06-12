@@ -90,7 +90,7 @@ func logMessageCbFromEvent(ctx *C.hashcat_ctx_t, lvl LogLevel) LogPayload {
 
 	return LogPayload{
 		Level:   lvl,
-		Message: C.GoStringN(&ectx.msg_buf[0], ectx.msg_len),
+		Message: C.GoStringN(&ectx.msg_buf[0], C.int(ectx.msg_len)),
 	}
 }
 

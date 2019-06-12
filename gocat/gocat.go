@@ -3,7 +3,7 @@ package gocat
 /*
 #cgo CFLAGS: -I/usr/local/include/hashcat -std=c99 -Wall -O0 -g
 #cgo linux CFLAGS: -D_GNU_SOURCE
-#cgo LDFLAGS: -L/usr/local/lib -lhashcat
+#cgo LDFLAGS: -L/usr/local/lib -lhashcat.5.1.0
 
 #include "wrapper.h"
 */
@@ -12,7 +12,6 @@ import (
 	"errors"
 	"fmt"
 	"os"
-	"path/filepath"
 	"sync"
 	"time"
 	"unsafe"
@@ -72,9 +71,12 @@ func (o *Options) validate() (err error) {
 	}
 
 	if o.ExecutablePath == "" {
-		if o.ExecutablePath, _ = filepath.Abs(filepath.Dir(os.Args[0])); err != nil {
+		path, err := os.Executable()
+		if err != nil {
 			return err
 		}
+
+		o.ExecutablePath = path
 	} else {
 		if _, err = os.Stat(o.ExecutablePath); err != nil {
 			return err
@@ -226,10 +228,6 @@ func callback(id uint32, hcCtx *C.hashcat_ctx_t, wrapper unsafe.Pointer, buf uns
 		if hcCtx.user_options.keyspace {
 			payload = logHashcatAction(id, fmt.Sprintf("Calculated Words Base: %d", hcCtx.status_ctx.words_base))
 		}
-	case C.EVENT_WEAK_HASH_PRE:
-		payload = logHashcatAction(id, "Checking for weak hashes")
-	case C.EVENT_WEAK_HASH_POST:
-		payload = logHashcatAction(id, "Checked for weak hashes")
 	case C.EVENT_HASHLIST_SORT_SALT_PRE:
 		payload = logHashcatAction(id, "Sorting salts...")
 	case C.EVENT_HASHLIST_SORT_SALT_POST:
@@ -274,7 +272,13 @@ func callback(id uint32, hcCtx *C.hashcat_ctx_t, wrapper unsafe.Pointer, buf uns
 		}
 	case C.EVENT_CRACKER_HASH_CRACKED, C.EVENT_POTFILE_HASH_SHOW:
 		// Grab the separator for this session out of user options
-		sepr := C.GoString(&hcCtx.user_options.separator)
+		userOpts := hcCtx.user_options
+		sepr := C.GoString(&userOpts.separator)
+		// XXX(cschmitt): What changed here that this is no longer set?
+		if sepr == "" {
+			sepr = ":"
+		}
+
 		msg := C.GoString((*C.char)(buf))
 		if payload, err = getCrackedPassword(id, msg, sepr); err != nil {
 			payload = logMessageWithError(id, err)
@@ -283,12 +287,6 @@ func callback(id uint32, hcCtx *C.hashcat_ctx_t, wrapper unsafe.Pointer, buf uns
 		payload = FinalStatusPayload{
 			Status:  ctx.GetStatus(),
 			EndedAt: time.Now().UTC(),
-		}
-	case C.EVENT_WEAK_HASH_ALL_CRACKED:
-		payload = FinalStatusPayload{
-			Status:           nil,
-			EndedAt:          time.Now().UTC(),
-			AllHashesCracked: true,
 		}
 	}
 

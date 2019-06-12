@@ -2,6 +2,7 @@
 
 package gocat
 
+/*
 import (
 	"io/ioutil"
 	"os"
@@ -44,6 +45,7 @@ func TestReentrantPatchWithPotfile(t *testing.T) {
 	assert.Equal(t, "world", *crackedHashes["7d793037a0760186574b0282f2f435e7"])
 }
 
+
 func TestReentrantPatchWithPotfileMixed(t *testing.T) {
 	crackedHashes := map[string]*string{}
 
@@ -82,6 +84,7 @@ func TestReentrantPatchWithPotfileMixed(t *testing.T) {
 	// Unfortunately, I haven't found a way to show partial potfile results so the hash for "hello" won't be returned by this test
 	assert.NotContains(t, "5d41402abc4b2a76b9719d911017c592", crackedHashes)
 	// ...this one should crack successfully though
+
 	assert.Equal(t, "chris", *crackedHashes["6b34fe24ac2ff8103f6fce1f0da2ef57"])
 
 	fd, err := os.OpenFile(potfilePath, os.O_WRONLY|os.O_TRUNC, os.ModePerm)
@@ -91,3 +94,4 @@ func TestReentrantPatchWithPotfileMixed(t *testing.T) {
 	}
 	fd.WriteAt(orignalPotfileContents, 0)
 }
+*/
