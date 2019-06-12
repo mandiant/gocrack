@@ -56,7 +56,7 @@ Example Configs for NGINX:
     * `allowed_origins`: A list of domains (origins) in which requests will be made from (UI). This is a [CORS]   (https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) setting.
     * `max_preflight_age`: Indicates how long the response of a preflight request can be cached by the browser. By default, this is set to 24 hours. It must be in the format of a [duration string](https://golang.org/pkg/time/#ParseDuration)
 1. `ui`
-    * `static_path`: Path containing `index.html` and a folder called `static` that serve as the GoCrack User Interface.  The reference user interface can be found in the [gorack-ui repository](https://github.com/fireeye/gocrack-ui).
+    * `static_path`: Path containing `index.html` and a folder called `static` that serve as the GoCrack User Interface.  The reference user interface can be found in the [gocrack-ui repository](https://github.com/fireeye/gocrack-ui).
     * `csrf_key`: A secure key that is used to sign the CSRF cookies. This should be set to a strong, random string
     * `csrf_enabled`: By default, this is true but on development instances this should be set to false.
 
