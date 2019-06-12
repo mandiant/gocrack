@@ -381,5 +381,5 @@ func (s *BoltBackend) DeleteTask(taskid string) error {
 		return convertErr(err)
 	}
 
-	return convertErr(s.db.From(bucketTasks).Remove(&bt))
+	return convertErr(s.db.From(bucketTasks).DeleteStruct(&bt))
 }

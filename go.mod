@@ -6,9 +6,8 @@ require (
 	github.com/DataDog/zstd v1.4.0 // indirect
 	github.com/Sereal/Sereal v0.0.0-20190606082811-cf1bab6c7a3a // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/asdine/storm v0.8.1
+	github.com/asdine/storm v2.1.2+incompatible
 	github.com/beorn7/perks v0.0.0-20160804104726-4c0e84591b9a // indirect
-	github.com/boltdb/bolt v0.0.0-20170131192018-e9cf4fae01b5 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/gin-contrib/cors v0.0.0-20170708080947-567de1916927
 	github.com/gin-contrib/sse v0.0.0-20170109093832-22d885f9ecc7 // indirect
@@ -40,6 +39,8 @@ require (
 	github.com/tchap/go-exchange v0.0.0-20141009085351-ebe3feb493da
 	github.com/tchap/go-patricia v2.2.6+incompatible // indirect
 	github.com/ugorji/go v0.0.0-20170620104852-5efa3251c7f7 // indirect
+	github.com/vmihailenco/msgpack v4.0.4+incompatible // indirect
+	go.etcd.io/bbolt v1.3.3 // indirect
 	golang.org/x/crypto v0.0.0-20190605123033-f99c8df09eb5
 	golang.org/x/net v0.0.0-20190611141213-3f473d35a33a // indirect
 	google.golang.org/appengine v1.6.1 // indirect
@@ -51,6 +52,5 @@ require (
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gopkg.in/ldap.v2 v2.5.0
 	gopkg.in/square/go-jose.v2 v2.1.1
-	gopkg.in/vmihailenco/msgpack.v2 v2.9.1 // indirect
 	gopkg.in/yaml.v2 v2.0.0-20170812160011-eb3733d160e7
 )

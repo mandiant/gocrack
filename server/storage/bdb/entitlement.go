@@ -136,7 +136,7 @@ func (s *BoltBackend) RevokeEntitlement(user storage.User, document interface{})
 		return convertErr(err)
 	}
 
-	if err = node.Remove(r); err != nil {
+	if err = node.DeleteStruct(r); err != nil {
 		return convertErr(err)
 	}
 
@@ -179,6 +179,6 @@ func (s *BoltBackend) RemoveEntitlements(entityID string, entType storage.Entitl
 	}
 
 	return convertErr(node.Select(q.Eq("EntitledID", entityID)).Each(new(boltEntitlement), func(record interface{}) error {
-		return node.Remove(record.(*boltEntitlement))
+		return node.DeleteStruct(record.(*boltEntitlement))
 	}))
 }
