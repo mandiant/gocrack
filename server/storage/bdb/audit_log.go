@@ -54,7 +54,7 @@ func (s *BoltBackend) RemoveActivityEntries(entityID string) error {
 	}
 
 	for _, ent := range entries {
-		s.db.From(bucketAuditLog).Remove(ent)
+		s.db.From(bucketAuditLog).DeleteStruct(ent)
 	}
 	return nil
 }

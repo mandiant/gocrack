@@ -38,14 +38,14 @@ func (s *BoltBackend) deleteFile(fileid string, filetype deleteType) error {
 			return err
 		}
 
-		return s.db.From(bucketTaskFiles...).Remove(&btf)
+		return s.db.From(bucketTaskFiles...).DeleteStruct(&btf)
 	case deleteTaskEngineFile:
 		var bsf boltEngineFile
 		if err := s.db.From(bucketEngineFiles...).One("FileID", fileid, &bsf); err != nil {
 			return err
 		}
 
-		return s.db.From(bucketEngineFiles...).Remove(&bsf)
+		return s.db.From(bucketEngineFiles...).DeleteStruct(&bsf)
 	}
 	return errors.New("unknown filetype")
 }
