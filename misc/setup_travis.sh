@@ -3,4 +3,5 @@
 
 cd $HOME
 git clone https://github.com/hashcat/hashcat.git && cd $HOME/hashcat && git submodule update --init --recursive && git checkout $HASHCAT_VERSION
-make SHARED=1
+make SHARED=1 ENABLE_BRAIN=0
+make install
