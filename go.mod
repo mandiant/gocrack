@@ -7,6 +7,7 @@ require (
 	github.com/Sereal/Sereal v0.0.0-20190606082811-cf1bab6c7a3a // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/asdine/storm v0.0.0-20190418133842-e0f77eada154
+	github.com/fireeye/gocat v0.0.0-20190613212338-ce97d32213d0
 	github.com/gin-contrib/cors v1.3.0
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.4.0

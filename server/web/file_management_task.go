@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fireeye/gocrack/gocat"
+	"github.com/fireeye/gocat"
 	"github.com/fireeye/gocrack/server/storage"
 
 	"github.com/gin-gonic/gin"
