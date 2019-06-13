@@ -54,6 +54,9 @@ func ValidateHashes(pathToHashes string, hashType uint32) (*ValidationResult, er
 		goto cleanup
 	}
 
+	// New in 5.1.X
+	C.hashes_init_filename(&validator.ctx)
+
 	hashes = validator.ctx.hashes
 	// Load hashes
 	if retval := C.hashes_init_stage1(&validator.ctx); retval != 0 {
