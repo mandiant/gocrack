@@ -115,6 +115,7 @@ func (s *RPCServer) getTaskPayload(c *gin.Context) *RPCError {
 			Err:        err,
 		}
 	}
+
 	c.JSON(http.StatusOK, &NewTaskPayloadResponse{
 		TaskID:        task.TaskID,
 		FileID:        task.FileID,
@@ -124,7 +125,6 @@ func (s *RPCServer) getTaskPayload(c *gin.Context) *RPCError {
 		TaskDuration:  task.TaskDuration,
 	})
 
-	c.JSON(http.StatusOK, task)
 	return nil
 }
 
