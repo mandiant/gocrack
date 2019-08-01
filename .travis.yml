@@ -6,7 +6,7 @@ env:
     - CGO_CFLAGS="-I$HOME/hashcat/deps/OpenCL-Headers -I$HOME/hashcat/include"
     - CGO_LDFLAGS="-L$HOME/hashcat"
     - LD_LIBRARY_PATH="/home/travis/hashcat:$LD_LIBRARY_PATH"
-    - HASHCAT_VERSION="v3.6.0"
+    - HASHCAT_VERSION="v5.1.0"
     - GO111MODULE=on
 
 addons:
@@ -19,7 +19,6 @@ before_install:
 
 go:
   - "1.12.x"
-  - tip
 
 script:
   - ./misc/codecov_tests.sh

@@ -18,6 +18,8 @@ github.com/coreos/go-systemd v0.0.0-20190321100706-95778dfbb74e/go.mod h1:F5haX7
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/fireeye/gocat v0.0.0-20190613212338-ce97d32213d0 h1:9Q627+zI86PEvW6swCZocEJKt9N2ALa+QF9RVhQX/nw=
+github.com/fireeye/gocat v0.0.0-20190613212338-ce97d32213d0/go.mod h1:jiQe5RA0SrrZbYO2QvfWgQKzLBDTmJH9nwrfokC3Euo=
 github.com/gin-contrib/cors v0.0.0-20170708080947-567de1916927 h1:Asmg6n4CmGBOR6Lc6v7NFVB7rTqeiig/lcPKxwC/YXw=
 github.com/gin-contrib/cors v0.0.0-20170708080947-567de1916927/go.mod h1:cw+u9IsAkC16e42NtYYVCLsHYXE98nB3M7Dr9mLSeH4=
 github.com/gin-contrib/cors v1.3.0 h1:PolezCc89peu+NgkIWt9OB01Kbzt6IP0J/JvkG6xxlg=

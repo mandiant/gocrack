@@ -2,7 +2,7 @@
 
 This repository includes docker containers that build the necessary components for a successful gocrack install.
 
-* Current Hashcat Version: v3.6
+* Current Hashcat Version: v5.1
 * Current Go Version: v1.9
 
 **Note**: You should be using Docker 17.X and require NVIDIA Docker plugin to run the worker image

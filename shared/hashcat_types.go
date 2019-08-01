@@ -73,8 +73,48 @@ var SupportedHashcatModes = []HModeInfo{
 		Category: "Raw Hash",
 	},
 	{
-		Number:   5000,
-		Name:     "SHA-3(Keccak)",
+		Number:   17300,
+		Name:     "SHA3-224",
+		Category: "Raw Hash",
+	},
+	{
+		Number:   17400,
+		Name:     "SHA3-256",
+		Category: "Raw Hash",
+	},
+	{
+		Number:   17500,
+		Name:     "SHA3-384",
+		Category: "Raw Hash",
+	},
+	{
+		Number:   17600,
+		Name:     "SHA3-512",
+		Category: "Raw Hash",
+	},
+	{
+		Number:   17700,
+		Name:     "Keccak-224",
+		Category: "Raw Hash",
+	},
+	{
+		Number:   17800,
+		Name:     "Keccak-256",
+		Category: "Raw Hash",
+	},
+	{
+		Number:   17900,
+		Name:     "Keccak-384",
+		Category: "Raw Hash",
+	},
+	{
+		Number:   18000,
+		Name:     "Keccak-512",
+		Category: "Raw Hash",
+	},
+	{
+		Number:   600,
+		Name:     "BLAKE2b-512",
 		Category: "Raw Hash",
 	},
 	{
@@ -99,12 +139,12 @@ var SupportedHashcatModes = []HModeInfo{
 	},
 	{
 		Number:   11700,
-		Name:     "GOST R 34.11-2012 (Streebog) 256-bit",
+		Name:     "GOST R 34.11-2012 (Streebog) 256-bit, big-endian",
 		Category: "Raw Hash",
 	},
 	{
 		Number:   11800,
-		Name:     "GOST R 34.11-2012 (Streebog) 512-bit",
+		Name:     "GOST R 34.11-2012 (Streebog) 512-bit, big-endian",
 		Category: "Raw Hash",
 	},
 	{
@@ -294,6 +334,26 @@ var SupportedHashcatModes = []HModeInfo{
 		Category: "Raw Hash, Authenticated",
 	},
 	{
+		Number:   11750,
+		Name:     "HMAC-Streebog-256 (key = $pass), big-endian",
+		Category: "Raw Hash, Authenticated",
+	},
+	{
+		Number:   11760,
+		Name:     "HMAC-Streebog-256 (key = $salt), big-endian",
+		Category: "Raw Hash, Authenticated",
+	},
+	{
+		Number:   11850,
+		Name:     "HMAC-Streebog-512 (key = $pass), big-endian",
+		Category: "Raw Hash, Authenticated",
+	},
+	{
+		Number:   11860,
+		Name:     "HMAC-Streebog-512 (key = $salt), big-endian",
+		Category: "Raw Hash, Authenticated",
+	},
+	{
 		Number:   14000,
 		Name:     "DES (PT = $salt, key = $pass)",
 		Category: "Raw Cipher, Known-Plaintext attack",
@@ -345,7 +405,22 @@ var SupportedHashcatModes = []HModeInfo{
 	},
 	{
 		Number:   2500,
-		Name:     "WPA/WPA2",
+		Name:     "WPA-EAPOL-PBKDF2",
+		Category: "Network protocols",
+	},
+	{
+		Number:   2501,
+		Name:     "WPA-EAPOL-PMK",
+		Category: "Network protocols",
+	},
+	{
+		Number:   16800,
+		Name:     "WPA-PMKID-PBKDF2",
+		Category: "Network protocols",
+	},
+	{
+		Number:   16801,
+		Name:     "WPA-PMKID-PMK",
 		Category: "Network protocols",
 	},
 	{
@@ -415,6 +490,21 @@ var SupportedHashcatModes = []HModeInfo{
 		Name:     "Kerberos 5 TGS-REP etype 23",
 		Category: "Network protocols",
 		Example:  "$krb5tgs$23$*user$realm$test/spn*$63386d22d359fe42230300d56852c9eb$891ad31d09ab89c6b3b8c5e5de6c06a7f49fd559d7a9a3c32576c8fedf705376cea582ab5938f7fc8bc741acf05c5990741b36ef4311fe3562a41b70a4ec6ecba849905f2385bb3799d92499909658c7287c49160276bca0006c350b0db4fd387adc27c01e9e9ad0c20ed53a7e6356dee2452e35eca2a6a1d1432796fc5c19d068978df74d3d0baf35c77de12456bf1144b6a750d11f55805f5a16ece2975246e2d026dce997fba34ac8757312e9e4e6272de35e20d52fb668c5ed",
+	},
+	{
+		Number:   16100,
+		Name:     "TACACS+",
+		Category: "Network protocols",
+	},
+	{
+		Number:   16500,
+		Name:     "JWT (JSON Web Token)",
+		Category: "Network protocols",
+	},
+	{
+		Number:   18200,
+		Name:     "Kerberos 5 AS-REP etype 23",
+		Category: "Network protocols",
 	},
 	{
 		Number:   121,
@@ -499,6 +589,11 @@ var SupportedHashcatModes = []HModeInfo{
 	{
 		Number:   10000,
 		Name:     "Django (PBKDF2-SHA256)",
+		Category: "Forums, CMS, E-Commerce, Frameworks",
+	},
+	{
+		Number:   16000,
+		Name:     "Tripcode",
 		Category: "Forums, CMS, E-Commerce, Frameworks",
 	},
 	{
@@ -627,6 +722,11 @@ var SupportedHashcatModes = []HModeInfo{
 		Category: "HTTP, SMTP, LDAP Server",
 	},
 	{
+		Number:   16400,
+		Name:     "CRAM-MD5 Dovecot",
+		Category: "HTTP, SMTP, LDAP Server",
+	},
+	{
 		Number:   15000,
 		Name:     "FileZilla Server >= 0.9.55",
 		Category: "FTP Server",
@@ -696,17 +796,17 @@ var SupportedHashcatModes = []HModeInfo{
 	},
 	{
 		Number:   122,
-		Name:     "OSX v10.4, OSX v10.5, OSX v10.6",
+		Name:     "macOS v10.4, MacOS v10.5, MacOS v10.6",
 		Category: "Operating-Systems",
 	},
 	{
 		Number:   1722,
-		Name:     "OSX v10.7",
+		Name:     "macOS v10.7",
 		Category: "Operating-Systems",
 	},
 	{
 		Number:   7100,
-		Name:     "OSX v10.8, OSX v10.9, OSX v10.10",
+		Name:     "macOS v10.8+ (PBKDF2-SHA512)",
 		Category: "Operating-Systems",
 	},
 	{
@@ -815,8 +915,18 @@ var SupportedHashcatModes = []HModeInfo{
 		Category: "Enterprise Application Software (EAS)",
 	},
 	{
+		Number:   7701,
+		Name:     "SAP CODVN B (BCODE) via RFC_READ_TABLE",
+		Category: "Enterprise Application Software (EAS)",
+	},
+	{
 		Number:   7800,
 		Name:     "SAP CODVN F/G (PASSCODE)",
+		Category: "Enterprise Application Software (EAS)",
+	},
+	{
+		Number:   7801,
+		Name:     "SAP CODVN F/G (PASSCODE) via RFC_READ_TABLE",
 		Category: "Enterprise Application Software (EAS)",
 	},
 	{
@@ -910,6 +1020,16 @@ var SupportedHashcatModes = []HModeInfo{
 		Category: "Full-Disk encryptions (FDE)",
 	},
 	{
+		Number:   16700,
+		Name:     "FileVault 2",
+		Category: "Full-Disk encryptions (FDE)",
+	},
+	{
+		Number:   18300,
+		Name:     "Apple File System (APFS)",
+		Category: "Full-Disk encryptions (FDE)",
+	},
+	{
 		Number:   9700,
 		Name:     "MS Office <= 2003 $0",
 		Category: "$1, MD5 + RC4               | Documents",
@@ -985,6 +1105,11 @@ var SupportedHashcatModes = []HModeInfo{
 		Category: "Documents",
 	},
 	{
+		Number:   16200,
+		Name:     "Apple Secure Notes",
+		Category: "Documents",
+	},
+	{
 		Number:   9000,
 		Name:     "Password Safe v2",
 		Category: "Password Managers",
@@ -1020,9 +1145,34 @@ var SupportedHashcatModes = []HModeInfo{
 		Category: "Password Managers",
 	},
 	{
+		Number:   15200,
+		Name:     "Blockchain, My Wallet V2",
+		Category: "Password Managers",
+	},
+	{
+		Number:   16600,
+		Name:     "Electrum Wallet (Salt-Type 1-3)",
+		Category: "Password Managers",
+	},
+	{
 		Number:   13400,
 		Name:     "Keepass 1 (AES/Twofish) and Keepass 2 (AES)",
 		Category: "Password Managers",
+	},
+	{
+		Number:   16300,
+		Name:     "Ethereum Pre-Sale Wallet, PBKDF2-HMAC-SHA256",
+		Category: "Password Managers",
+	},
+	{
+		Number:   16900,
+		Name:     "Ansible Vault",
+		Category: "Password Managers",
+	},
+	{
+		Number:   18100,
+		Name:     "TOTP (HMAC-SHA1)",
+		Category: "One-Time Passwords",
 	},
 	{
 		Number:   99999,
@@ -1231,7 +1381,12 @@ var SupportedHashcatModes = []HModeInfo{
 	},
 	{
 		Number:   15300,
-		Name:     "DPAPI masterkey file v1 and v2",
+		Name:     "DPAPI masterkey file v1",
+		Category: "Operating Systems",
+	},
+	{
+		Number:   15900,
+		Name:     "DPAPI masterkey file v2",
 		Category: "Operating Systems",
 	},
 }

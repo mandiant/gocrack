@@ -180,10 +180,9 @@ func newHTTPServer(cfg Config, s *Server) *http.Server {
 		c.File(filepath.Join(cfg.UserInterface.StaticPath, "index.html"))
 	})
 
-	engine.StaticFS("/static/js/", http.Dir(filepath.Join(cfg.UserInterface.StaticPath, "static", "js")))
-	engine.StaticFS("/static/css/", http.Dir(filepath.Join(cfg.UserInterface.StaticPath, "static", "css")))
-	engine.StaticFS("/static/fonts/", http.Dir(filepath.Join(cfg.UserInterface.StaticPath, "static", "fonts")))
-	engine.StaticFS("/static/img/", http.Dir(filepath.Join(cfg.UserInterface.StaticPath, "static", "img")))
+	engine.StaticFS("/js/", http.Dir(filepath.Join(cfg.UserInterface.StaticPath, "js")))
+	engine.StaticFS("/css/", http.Dir(filepath.Join(cfg.UserInterface.StaticPath, "css")))
+	engine.StaticFS("/img/", http.Dir(filepath.Join(cfg.UserInterface.StaticPath, "img")))
 	engine.StaticFile("/favicon.ico", filepath.Join(cfg.UserInterface.StaticPath, "favicon.ico"))
 	engine.GET("/gocrack-config.json", func(c *gin.Context) {
 		c.JSON(http.StatusOK, map[string]interface{}{

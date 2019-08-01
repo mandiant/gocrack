@@ -65,11 +65,12 @@ type CreateTaskResponse struct {
 
 // HashcatEnginePayload defines the structure of task.EnginePayload for jobs created for the hashcat engine
 type HashcatEnginePayload struct {
-	HashType         string          `json:"hash_type"`
-	AttackMode       string          `json:"attack_mode"`
-	Masks            *EngineFileItem `json:"masks,omitempty"`
-	DictionaryFile   *EngineFileItem `json:"dictionary_file,omitempty"`
-	ManglingRuleFile *EngineFileItem `json:"mangling_file,omitempty"`
+	HashType               string          `json:"hash_type"`
+	AttackMode             string          `json:"attack_mode"`
+	Masks                  *EngineFileItem `json:"masks,omitempty"`
+	DictionaryFile         *EngineFileItem `json:"dictionary_file,omitempty"`
+	ManglingRuleFile       *EngineFileItem `json:"mangling_file,omitempty"`
+	DisableOptimizedEngine bool            `json:"disable_optimizations"`
 }
 
 // TaskInfoResponseItem defines the response for all the information possible about a given task
@@ -300,8 +301,8 @@ NoAccess:
 	}
 BadRequest:
 	return &WebAPIError{
-		StatusCode: http.StatusBadRequest,
-		Err:        err,
+		StatusCode:            http.StatusBadRequest,
+		Err:                   err,
 		CanErrorBeShownToUser: true,
 		UserError:             "Your request is malformed",
 	}
@@ -370,24 +371,24 @@ func (s *Server) getAvailableTasks(c *gin.Context) *WebAPIError {
 
 	if pageNum, err = strconv.Atoi(c.DefaultQuery("page", "0")); err != nil {
 		return &WebAPIError{
-			StatusCode: http.StatusBadRequest,
-			Err:        errors.New("page must be an integer"),
+			StatusCode:            http.StatusBadRequest,
+			Err:                   errors.New("page must be an integer"),
 			CanErrorBeShownToUser: true,
 		}
 	}
 
 	if limit, err = strconv.Atoi(c.DefaultQuery("limit", "20")); err != nil {
 		return &WebAPIError{
-			StatusCode: http.StatusBadRequest,
-			Err:        errors.New("limit must be an integer"),
+			StatusCode:            http.StatusBadRequest,
+			Err:                   errors.New("limit must be an integer"),
 			CanErrorBeShownToUser: true,
 		}
 	}
 
 	if ascendingOrder, err = strconv.ParseBool(c.DefaultQuery("ascending", "0")); err != nil {
 		return &WebAPIError{
-			StatusCode: http.StatusBadRequest,
-			Err:        errors.New("ascending must be a boolean"),
+			StatusCode:            http.StatusBadRequest,
+			Err:                   errors.New("ascending must be a boolean"),
 			CanErrorBeShownToUser: true,
 		}
 	}
@@ -497,8 +498,8 @@ func (s *Server) webChangeTaskStatus(c *gin.Context) *WebAPIError {
 
 	if err := c.BindJSON(&req); err != nil {
 		return &WebAPIError{
-			StatusCode: http.StatusBadRequest,
-			Err:        err,
+			StatusCode:            http.StatusBadRequest,
+			Err:                   err,
 			CanErrorBeShownToUser: true,
 		}
 	}
@@ -588,8 +589,8 @@ func (s *Server) webModifyTask(c *gin.Context) *WebAPIError {
 
 	if err := c.BindJSON(&request); err != nil {
 		return &WebAPIError{
-			StatusCode: http.StatusBadRequest,
-			Err:        err,
+			StatusCode:            http.StatusBadRequest,
+			Err:                   err,
 			CanErrorBeShownToUser: true,
 		}
 	}

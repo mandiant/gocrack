@@ -1,5 +1,14 @@
 # GoCrack Changelog
 
+## 2.1
+
+New Features:
+
+* Update Go to 1.12.6
+* Support for Go Modules
+* Updated all server dependencies
+* Dropped support for Hashcat 3.6 for 5.1
+
 ## 2.0
 
 New Features:

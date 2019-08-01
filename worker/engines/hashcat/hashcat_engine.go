@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"runtime"
 	"unsafe"
 
-	"github.com/fireeye/gocrack/gocat"
-	"github.com/fireeye/gocrack/gocat/hcargp"
-	"github.com/fireeye/gocrack/gocat/restoreutil"
+	"github.com/fireeye/gocat"
+	"github.com/fireeye/gocat/hcargp"
+	"github.com/fireeye/gocat/restoreutil"
 	"github.com/fireeye/gocrack/opencl"
 	"github.com/fireeye/gocrack/server/rpc"
 	"github.com/fireeye/gocrack/server/storage"
@@ -141,9 +142,10 @@ func (s *HashcatEngine) Start() error {
 	if _, err := os.Stat(restoreFilePath); !os.IsNotExist(err) {
 		// When restoring, we can really only set restore related options
 		opts = hcargp.HashcatSessionOptions{
-			RestoreSession:  hcargp.GetBoolPtr(true),
-			SessionName:     hcargp.GetStringPtr(s.TaskID),
-			RestoreFilePath: hcargp.GetStringPtr(restoreFilePath),
+			RestoreSession:         hcargp.GetBoolPtr(true),
+			SessionName:            hcargp.GetStringPtr(s.TaskID),
+			RestoreFilePath:        hcargp.GetStringPtr(restoreFilePath),
+			OptimizedKernelEnabled: hcargp.GetBoolPtr(true),
 		}
 
 		checkpoint, err := restoreutil.ReadRestoreFile(restoreFilePath)
@@ -170,13 +172,14 @@ func (s *HashcatEngine) Start() error {
 	} else {
 		// Not a restore
 		opts = hcargp.HashcatSessionOptions{
-			AttackMode:      hcargp.GetIntPtr(int(s.Options.AttackMode)),
-			HashType:        hcargp.GetIntPtr(s.Options.HashType),
-			PotfileDisable:  hcargp.GetBoolPtr(true),
-			InputFile:       s.TaskFilePath,
-			SessionName:     hcargp.GetStringPtr(s.TaskID),
-			RestoreFilePath: hcargp.GetStringPtr(restoreFilePath),
-			OutfilePath:     hcargp.GetStringPtr(outFilePath),
+			AttackMode:             hcargp.GetIntPtr(int(s.Options.AttackMode)),
+			HashType:               hcargp.GetIntPtr(s.Options.HashType),
+			PotfileDisable:         hcargp.GetBoolPtr(true),
+			InputFile:              s.TaskFilePath,
+			SessionName:            hcargp.GetStringPtr(s.TaskID),
+			RestoreFilePath:        hcargp.GetStringPtr(restoreFilePath),
+			OutfilePath:            hcargp.GetStringPtr(outFilePath),
+			OptimizedKernelEnabled: hcargp.GetBoolPtr(true),
 		}
 
 		if s.MasksFile != "" && s.Options.AttackMode == shared.AttackModeBruteForce {
@@ -220,6 +223,9 @@ func (s *HashcatEngine) Start() error {
 			opts.OpenCLDeviceTypes = hcargp.GetStringPtr(shared.IntSliceToString(devTypes))
 		}
 	}
+
+	runtime.LockOSThread()
+	defer runtime.UnlockOSThread()
 
 	defer saveCheckpoint(s.Upstream, s.TaskID, restoreFilePath)
 	return s.engine.RunJobWithOptions(opts)
