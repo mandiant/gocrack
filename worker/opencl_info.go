@@ -20,6 +20,9 @@ func GetAvailableDevices() (shared.DeviceMap, error) {
 	for _, platform := range platforms {
 		devices, err := platform.GetDevices(opencl.DeviceTypeAll)
 		if err != nil {
+			if err == opencl.ErrDeviceNotFound {
+				continue
+			}
 			return nil, err
 		}
 
@@ -37,6 +40,10 @@ func GetAvailableDevices() (shared.DeviceMap, error) {
 			}
 			devs[gDeviceID] = dev
 		}
+	}
+
+	if len(devs) == 0 {
+		return nil, opencl.ErrDeviceNotFound
 	}
 
 	return devs, nil
