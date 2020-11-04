@@ -10,7 +10,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fireeye/gocat"
 	"github.com/fireeye/gocrack/server/storage"
 
 	"github.com/gin-gonic/gin"
@@ -151,27 +150,29 @@ func (s *Server) webUploadTaskFile(c *gin.Context) *WebAPIError {
 				UserError:  "filetype must be an integer",
 			}
 		}
+		// TODO: Update this to use the new hash validator
+		_ = ftint
 
-		vresults, err := gocat.ValidateHashes(fresp.SavedTo, uint32(ftint))
-		if err != nil {
-			os.Remove(fresp.SavedTo)
-			return &WebAPIError{
-				StatusCode: http.StatusInternalServerError,
-				Err:        err,
-				UserError:  "Could not validate your file",
-			}
-		}
+		// vresults, err := gocat.ValidateHashes(fresp.SavedTo, uint32(ftint))
+		// if err != nil {
+		// 	os.Remove(fresp.SavedTo)
+		// 	return &WebAPIError{
+		// 		StatusCode: http.StatusInternalServerError,
+		// 		Err:        err,
+		// 		UserError:  "Could not validate your file",
+		// 	}
+		// }
 
-		if vresults != nil && len(vresults.Errors) > 0 {
-			os.Remove(fresp.SavedTo)
-			c.JSON(http.StatusBadRequest, &TaskFileLintError{
-				Errors:  vresults.Errors,
-				Message: "One or more hashes in the file are not valid for the filetype you have selected",
-			})
-			return nil
-		}
-		tf.NumberOfPasswords = int(vresults.NumHashesUnique)
-		tf.NumberOfSalts = int(vresults.NumSalts)
+		// if vresults != nil && len(vresults.Errors) > 0 {
+		// 	os.Remove(fresp.SavedTo)
+		// 	c.JSON(http.StatusBadRequest, &TaskFileLintError{
+		// 		Errors:  vresults.Errors,
+		// 		Message: "One or more hashes in the file are not valid for the filetype you have selected",
+		// 	})
+		// 	return nil
+		// }
+		// tf.NumberOfPasswords = int(vresults.NumHashesUnique)
+		// tf.NumberOfSalts = int(vresults.NumSalts)
 	}
 
 	if txn, err = s.stor.NewTaskFileTransaction(); err != nil {

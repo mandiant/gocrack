@@ -23,10 +23,10 @@ build:
 		cmd/gocrack_server/*.go
 
 static_analysis:
-	go vet `go list ./... | egrep -v 'gocat|vendor'`
+	go vet `go list ./...`
 
 test:
-	go test -cover -v `go list ./... | egrep -v 'gocat|vendor'`
+	go test -cover -v `go list ./...`
 
 clean:
 	rm -rf builds/

@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/fireeye/gocat/restoreutil"
+	"github.com/fireeye/gocat/v6/restoreutil"
 	"github.com/fireeye/gocrack/opencl"
 	"github.com/fireeye/gocrack/server/storage"
 	"github.com/fireeye/gocrack/shared"
