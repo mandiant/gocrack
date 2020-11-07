@@ -8,7 +8,7 @@ GoCrack provides APIs to manage password cracking tasks across supported crackin
 
 ## Supported Engines
 
-* [hashcat 5.X+](https://github.com/hashcat/hashcat)
+* [hashcat 6.X+](https://github.com/hashcat/hashcat)
 
 ## Documentation
 

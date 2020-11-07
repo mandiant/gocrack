@@ -1,6 +1,7 @@
 package web
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"mime/multipart"
@@ -14,6 +15,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
+	"github.com/tankbusta/hashvalidate"
 )
 
 type APIEngine storage.TaskFileEngine
@@ -150,29 +152,49 @@ func (s *Server) webUploadTaskFile(c *gin.Context) *WebAPIError {
 				UserError:  "filetype must be an integer",
 			}
 		}
-		// TODO: Update this to use the new hash validator
-		_ = ftint
 
-		// vresults, err := gocat.ValidateHashes(fresp.SavedTo, uint32(ftint))
-		// if err != nil {
-		// 	os.Remove(fresp.SavedTo)
-		// 	return &WebAPIError{
-		// 		StatusCode: http.StatusInternalServerError,
-		// 		Err:        err,
-		// 		UserError:  "Could not validate your file",
-		// 	}
-		// }
+		file, err := os.Open(fresp.SavedTo)
+		if err != nil {
+			os.Remove(fresp.SavedTo)
+			return &WebAPIError{
+				StatusCode: http.StatusInternalServerError,
+				UserError:  "Could not verify hashes",
+				Err:        err,
+			}
+		}
+		defer file.Close()
 
-		// if vresults != nil && len(vresults.Errors) > 0 {
-		// 	os.Remove(fresp.SavedTo)
-		// 	c.JSON(http.StatusBadRequest, &TaskFileLintError{
-		// 		Errors:  vresults.Errors,
-		// 		Message: "One or more hashes in the file are not valid for the filetype you have selected",
-		// 	})
-		// 	return nil
-		// }
-		// tf.NumberOfPasswords = int(vresults.NumHashesUnique)
-		// tf.NumberOfSalts = int(vresults.NumSalts)
+		hashes := 0
+		errors := make([]string, 0)
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			if err := hashvalidate.ValidateHash(ftint, scanner.Text()); err != nil {
+				errors = append(errors, err.Error())
+				continue
+			}
+
+			hashes++
+		}
+
+		if err := scanner.Err(); err != nil {
+			os.Remove(fresp.SavedTo)
+			return &WebAPIError{
+				StatusCode: http.StatusInternalServerError,
+				UserError:  "Could not verify hashes",
+				Err:        err,
+			}
+		}
+
+		if len(errors) > 0 {
+			os.Remove(fresp.SavedTo)
+			c.JSON(http.StatusBadRequest, &TaskFileLintError{
+				Errors:  errors,
+				Message: "One or more hashes in the file are not valid for the filetype you have selected",
+			})
+			return nil
+		}
+
+		tf.NumberOfPasswords = hashes
 	}
 
 	if txn, err = s.stor.NewTaskFileTransaction(); err != nil {
