@@ -7,7 +7,7 @@ require (
 	github.com/Sereal/Sereal v0.0.0-20190606082811-cf1bab6c7a3a // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/asdine/storm v0.0.0-20190418133842-e0f77eada154
-	github.com/fireeye/gocat/v6 v6.0.0-20201107211940-ee0934ddd902
+	github.com/fireeye/gocat/v6 v6.0.0
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-ole/go-ole v1.2.4 // indirect
@@ -22,7 +22,7 @@ require (
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
 	github.com/stretchr/testify v1.6.1
 	github.com/tankbusta/gzip v0.0.0-20171023233440-5ea045a82e8f
-	github.com/tankbusta/hashvalidate v0.11.0
+	github.com/tankbusta/hashvalidate v0.11.1
 	github.com/tchap/go-exchange v0.0.0-20141009085351-ebe3feb493da
 	github.com/tchap/go-patricia v2.3.0+incompatible // indirect
 	github.com/vmihailenco/msgpack v4.0.4+incompatible // indirect
