@@ -168,7 +168,13 @@ func (s *Server) webUploadTaskFile(c *gin.Context) *WebAPIError {
 		errors := make([]string, 0)
 		scanner := bufio.NewScanner(file)
 		for scanner.Scan() {
-			if err := hashvalidate.ValidateHash(ftint, scanner.Text()); err != nil {
+			val := scanner.Text()
+			if err := hashvalidate.ValidateHash(ftint, val); err != nil {
+				// TODO: We should raise some warning here
+				if strings.Contains(err.Error(), "does not exist") {
+					continue
+				}
+
 				errors = append(errors, err.Error())
 				continue
 			}
