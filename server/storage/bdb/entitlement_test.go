@@ -6,7 +6,7 @@ import (
 
 	"github.com/fireeye/gocrack/server/storage"
 
-	uuid "github.com/satori/go.uuid"
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -14,13 +14,13 @@ func TestEntitlement(t *testing.T) {
 	db := initTest(t)
 	defer db.DestroyTest()
 
-	dummyUUID := uuid.NewV4().String()
+	dummyUUID := uuid.NewString()
 	taskFile := storage.TaskFile{
 		FileID:         dummyUUID,
 		SavedAt:        "/tmp/foobaz",
 		UploadedAt:     time.Now(),
 		UploadedBy:     "testing",
-		UploadedByUUID: uuid.NewV4().String(),
+		UploadedByUUID: uuid.NewString(),
 	}
 
 	txn, err := db.NewTaskFileTransaction()
@@ -36,7 +36,7 @@ func TestEntitlement(t *testing.T) {
 
 	// We don't actually need to save this record
 	dummyUserRec := storage.User{
-		UserUUID: uuid.NewV4().String(),
+		UserUUID: uuid.NewString(),
 	}
 
 	// User shouldnt be entitled to this document...yet

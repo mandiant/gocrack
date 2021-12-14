@@ -7,13 +7,13 @@ import (
 
 	"github.com/fireeye/gocrack/server/storage"
 
-	uuid "github.com/satori/go.uuid"
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 )
 
 func generateRandomAuditEntry(entID string, userID string) storage.ActivityLogEntry {
 	if userID == "" {
-		userID = uuid.NewV4().String()
+		userID = uuid.NewString()
 	}
 
 	return storage.ActivityLogEntry{

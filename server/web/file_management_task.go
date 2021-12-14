@@ -14,7 +14,7 @@ import (
 	"github.com/fireeye/gocrack/server/storage"
 
 	"github.com/gin-gonic/gin"
-	uuid "github.com/satori/go.uuid"
+	"github.com/google/uuid"
 	"github.com/tankbusta/hashvalidate"
 )
 
@@ -111,7 +111,7 @@ func (s *Server) webUploadTaskFile(c *gin.Context) *WebAPIError {
 		FileName:       c.Param("filename"),
 		UploadedAt:     time.Now().UTC(),
 		UploadedByUUID: claim.UserUUID,
-		FileID:         uuid.NewV4().String(),
+		FileID:         uuid.NewString(),
 	}
 
 	engineTypeStr, _ := c.GetQuery("engine")

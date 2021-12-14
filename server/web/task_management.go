@@ -12,7 +12,7 @@ import (
 	"github.com/fireeye/gocrack/shared"
 
 	"github.com/gin-gonic/gin"
-	uuid "github.com/satori/go.uuid"
+	"github.com/google/uuid"
 )
 
 type TaskCrackEngineFancy storage.WorkerCrackEngine
@@ -241,7 +241,7 @@ func (s *Server) webCreateTask(c *gin.Context) *WebAPIError {
 
 	task = storage.Task{
 		TaskName:      request.TaskName,
-		TaskID:        uuid.NewV4().String(),
+		TaskID:        uuid.NewString(),
 		CreatedAt:     now,
 		CreatedByUUID: claim.UserUUID,
 		LastUpdatedAt: now,

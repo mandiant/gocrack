@@ -13,7 +13,7 @@ import (
 	"github.com/fireeye/gocrack/server/storage"
 
 	"github.com/gin-gonic/gin"
-	uuid "github.com/satori/go.uuid"
+	"github.com/google/uuid"
 )
 
 type FileType storage.EngineFileType
@@ -86,7 +86,7 @@ func (s *Server) webUploadEngineFile(c *gin.Context) *WebAPIError {
 	sf := storage.EngineFile{
 		FileName:       c.Param("filename"),
 		UploadedByUUID: claim.UserUUID,
-		FileID:         uuid.NewV4().String(),
+		FileID:         uuid.NewString(),
 		IsShared:       isShared,
 	}
 

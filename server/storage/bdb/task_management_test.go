@@ -9,7 +9,7 @@ import (
 	"github.com/fireeye/gocrack/server/storage"
 	"github.com/fireeye/gocrack/shared"
 
-	uuid "github.com/satori/go.uuid"
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -21,9 +21,9 @@ var testUnexpectedValInGetNextTestCmp = "expected next task differs from what wa
 
 func createTestJobDoc(t *testing.T, txn storage.CreateTaskTxn, userDoc *storage.User) (*storage.Task, error) {
 	doc := &storage.Task{
-		TaskID:        uuid.NewV4().String(),
+		TaskID:        uuid.NewString(),
 		TaskName:      "My Awesome Task!",
-		FileID:        uuid.NewV4().String(),
+		FileID:        uuid.NewString(),
 		CreatedByUUID: userDoc.UserUUID,
 	}
 	return doc, txn.CreateTask(doc)
@@ -117,12 +117,12 @@ func TestTaskManagementGetNextTaskForHost(t *testing.T) {
 		{
 			Tasks: []storage.Task{
 				{
-					FileID:            uuid.NewV4().String(),
-					TaskID:            uuid.NewV4().String(),
+					FileID:            uuid.NewString(),
+					TaskID:            uuid.NewString(),
 					TaskName:          "Testing",
 					CaseCode:          shared.GetStrPtr("CC-1337"),
 					CreatedBy:         "testing",
-					CreatedByUUID:     uuid.NewV4().String(),
+					CreatedByUUID:     uuid.NewString(),
 					CreatedAt:         time.Now().UTC(),
 					AssignedToHost:    "my-hostname",
 					AssignedToDevices: &storage.CLDevices{4, 5},
@@ -139,12 +139,12 @@ func TestTaskManagementGetNextTaskForHost(t *testing.T) {
 		{
 			Tasks: []storage.Task{
 				{
-					FileID:            uuid.NewV4().String(),
-					TaskID:            uuid.NewV4().String(),
+					FileID:            uuid.NewString(),
+					TaskID:            uuid.NewString(),
 					TaskName:          "Testing",
 					CaseCode:          shared.GetStrPtr("CC-1337"),
 					CreatedBy:         "testing",
-					CreatedByUUID:     uuid.NewV4().String(),
+					CreatedByUUID:     uuid.NewString(),
 					CreatedAt:         time.Now().UTC(),
 					AssignedToHost:    "my-hostname",
 					AssignedToDevices: &storage.CLDevices{4, 5},
@@ -160,12 +160,12 @@ func TestTaskManagementGetNextTaskForHost(t *testing.T) {
 		{
 			Tasks: []storage.Task{
 				{
-					FileID:            uuid.NewV4().String(),
-					TaskID:            uuid.NewV4().String(),
+					FileID:            uuid.NewString(),
+					TaskID:            uuid.NewString(),
 					TaskName:          "Testing",
 					CaseCode:          shared.GetStrPtr("CC-1337"),
 					CreatedBy:         "testing",
-					CreatedByUUID:     uuid.NewV4().String(),
+					CreatedByUUID:     uuid.NewString(),
 					CreatedAt:         time.Now().UTC(),
 					AssignedToDevices: &storage.CLDevices{4, 5},
 				},
@@ -180,21 +180,21 @@ func TestTaskManagementGetNextTaskForHost(t *testing.T) {
 		{
 			Tasks: []storage.Task{
 				{
-					FileID:        uuid.NewV4().String(),
-					TaskID:        uuid.NewV4().String(),
+					FileID:        uuid.NewString(),
+					TaskID:        uuid.NewString(),
 					TaskName:      "Testing",
 					CaseCode:      shared.GetStrPtr("CC-1337"),
 					CreatedBy:     "testing",
-					CreatedByUUID: uuid.NewV4().String(),
+					CreatedByUUID: uuid.NewString(),
 					CreatedAt:     time.Now().UTC().Add(-time.Duration(time.Hour * 4)),
 				},
 				{
-					FileID:        uuid.NewV4().String(),
-					TaskID:        uuid.NewV4().String(),
+					FileID:        uuid.NewString(),
+					TaskID:        uuid.NewString(),
 					TaskName:      "Testing2",
 					CaseCode:      shared.GetStrPtr("CC-1338"),
 					CreatedBy:     "testing",
-					CreatedByUUID: uuid.NewV4().String(),
+					CreatedByUUID: uuid.NewString(),
 					CreatedAt:     time.Now().UTC(),
 				},
 			},
@@ -208,12 +208,12 @@ func TestTaskManagementGetNextTaskForHost(t *testing.T) {
 		{
 			Tasks: []storage.Task{
 				{
-					FileID:        uuid.NewV4().String(),
-					TaskID:        uuid.NewV4().String(),
+					FileID:        uuid.NewString(),
+					TaskID:        uuid.NewString(),
 					TaskName:      "Testing",
 					CaseCode:      shared.GetStrPtr("CC-1337"),
 					CreatedBy:     "testing",
-					CreatedByUUID: uuid.NewV4().String(),
+					CreatedByUUID: uuid.NewString(),
 					CreatedAt:     time.Now().UTC().Add(-time.Duration(time.Hour * 4)),
 					Status:        storage.TaskStatusFinished,
 				},
@@ -225,22 +225,22 @@ func TestTaskManagementGetNextTaskForHost(t *testing.T) {
 		{
 			Tasks: []storage.Task{
 				{
-					FileID:        uuid.NewV4().String(),
-					TaskID:        uuid.NewV4().String(),
+					FileID:        uuid.NewString(),
+					TaskID:        uuid.NewString(),
 					TaskName:      "Testing",
 					CaseCode:      shared.GetStrPtr("CC-1337"),
-					CreatedByUUID: uuid.NewV4().String(),
+					CreatedByUUID: uuid.NewString(),
 					CreatedBy:     "testing",
 					CreatedAt:     time.Now().UTC().Add(-time.Duration(time.Hour * 4)),
 					Priority:      storage.WorkerPriorityNormal,
 				},
 				{
-					FileID:        uuid.NewV4().String(),
-					TaskID:        uuid.NewV4().String(),
+					FileID:        uuid.NewString(),
+					TaskID:        uuid.NewString(),
 					TaskName:      "Testing2",
 					CaseCode:      shared.GetStrPtr("CC-1338"),
 					CreatedBy:     "testing",
-					CreatedByUUID: uuid.NewV4().String(),
+					CreatedByUUID: uuid.NewString(),
 					CreatedAt:     time.Now().UTC(),
 					Priority:      storage.WorkerPriorityHigh,
 				},
@@ -304,26 +304,26 @@ func TestTaskManagementProperlyQueueingTasks(t *testing.T) {
 	db := initTest(t)
 	defer db.DestroyTest()
 
-	firstTaskID := uuid.NewV4().String()
+	firstTaskID := uuid.NewString()
 	tasks := []storage.Task{
 		{
-			FileID:            uuid.NewV4().String(),
+			FileID:            uuid.NewString(),
 			TaskID:            firstTaskID,
 			TaskName:          "Testing",
 			CaseCode:          shared.GetStrPtr("CC-1337"),
 			CreatedBy:         "testing",
-			CreatedByUUID:     uuid.NewV4().String(),
+			CreatedByUUID:     uuid.NewString(),
 			CreatedAt:         time.Now().UTC(),
 			AssignedToHost:    "my-hostname",
 			AssignedToDevices: &storage.CLDevices{4, 5},
 		},
 		{
-			FileID:            uuid.NewV4().String(),
-			TaskID:            uuid.NewV4().String(),
+			FileID:            uuid.NewString(),
+			TaskID:            uuid.NewString(),
 			TaskName:          "Testing 2",
 			CaseCode:          shared.GetStrPtr("CC-1337"),
 			CreatedBy:         "testing",
-			CreatedByUUID:     uuid.NewV4().String(),
+			CreatedByUUID:     uuid.NewString(),
 			CreatedAt:         time.Now().UTC().Add(1 * time.Minute),
 			AssignedToDevices: &storage.CLDevices{5},
 		},
@@ -367,12 +367,12 @@ func TestDeleteTask(t *testing.T) {
 	defer db.DestroyTest()
 
 	doc := storage.Task{
-		FileID:            uuid.NewV4().String(),
-		TaskID:            uuid.NewV4().String(),
+		FileID:            uuid.NewString(),
+		TaskID:            uuid.NewString(),
 		TaskName:          "Testing",
 		CaseCode:          shared.GetStrPtr("CC-1337"),
 		CreatedBy:         "testing",
-		CreatedByUUID:     uuid.NewV4().String(),
+		CreatedByUUID:     uuid.NewString(),
 		CreatedAt:         time.Now().UTC(),
 		AssignedToHost:    "my-hostname",
 		AssignedToDevices: &storage.CLDevices{4, 5},

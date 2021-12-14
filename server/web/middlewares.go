@@ -7,9 +7,9 @@ import (
 	"github.com/fireeye/gocrack/server/storage"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"github.com/gorilla/csrf"
 	"github.com/rs/zerolog/log"
-	uuid "github.com/satori/go.uuid"
 )
 
 // logAction records potentially sensitive actions to the database for auditing purposes

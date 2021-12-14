@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/fireeye/gocrack/server/authentication"
-	uuid "github.com/satori/go.uuid"
+	"github.com/google/uuid"
 
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
@@ -68,7 +68,7 @@ func TestInternal_checkParamValidUUID(t *testing.T) {
 	assert.Equal(t, "The UUID in the HTTP Path is not valid", ae.Error)
 
 	// Make a good one!
-	req, _ = http.NewRequest("GET", fmt.Sprintf("/test/%s", uuid.NewV4().String()), nil)
+	req, _ = http.NewRequest("GET", fmt.Sprintf("/test/%s", uuid.NewString()), nil)
 
 	w = httptest.NewRecorder()
 	e.ServeHTTP(w, req)

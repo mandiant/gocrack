@@ -7,8 +7,8 @@ import (
 
 	"github.com/fireeye/gocrack/server/storage"
 
+	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
-	uuid "github.com/satori/go.uuid"
 )
 
 type extlookup map[string]storage.EngineFileType
@@ -48,7 +48,7 @@ func (s *Context) importDirectory() error {
 			Str("extension", extension).
 			Msg("Importing file")
 
-		fileUUID := uuid.NewV4().String()
+		fileUUID := uuid.NewString()
 		fd, err := os.Open(path)
 		if err != nil {
 			nonFatalError = err
