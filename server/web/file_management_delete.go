@@ -4,8 +4,8 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/fireeye/gocrack/server/storage"
-	"github.com/fireeye/gocrack/shared"
+	"github.com/mandiant/gocrack/server/storage"
+	"github.com/mandiant/gocrack/shared"
 
 	"github.com/gin-gonic/gin"
 )

@@ -2,7 +2,9 @@ package opencl
 
 // #include "include.h"
 import "C"
-import "unsafe"
+import (
+	"unsafe"
+)
 
 const maxDeviceCount = 64
 

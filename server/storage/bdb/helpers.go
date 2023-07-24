@@ -3,7 +3,7 @@ package bdb
 import (
 	"errors"
 
-	"github.com/fireeye/gocrack/server/storage"
+	"github.com/mandiant/gocrack/server/storage"
 
 	"github.com/asdine/storm"
 )

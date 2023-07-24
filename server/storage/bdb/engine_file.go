@@ -1,7 +1,7 @@
 package bdb
 
 import (
-	"github.com/fireeye/gocrack/server/storage"
+	"github.com/mandiant/gocrack/server/storage"
 
 	"github.com/asdine/storm"
 	"github.com/asdine/storm/q"

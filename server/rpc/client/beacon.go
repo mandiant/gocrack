@@ -1,6 +1,6 @@
 package client
 
-import "github.com/fireeye/gocrack/server/rpc"
+import "github.com/mandiant/gocrack/server/rpc"
 
 // Beacon sends our current status to the server
 func (s *RPCClient) Beacon(beaconRequest rpc.BeaconRequest) (*rpc.BeaconResponse, error) {

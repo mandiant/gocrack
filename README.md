@@ -1,6 +1,6 @@
 # gocrack
 
-[![Build Status](https://travis-ci.org/fireeye/gocrack.svg?branch=master)](https://travis-ci.org/fireeye/gocrack) [![codecov](https://codecov.io/gh/fireeye/gocrack/branch/master/graph/badge.svg)](https://codecov.io/gh/fireeye/gocrack) [![reportcard](https://goreportcard.com/badge/github.com/fireeye/gocrack)](https://goreportcard.com/report/github.com/fireeye/gocrack)
+[![Build Status](https://travis-ci.org/mandiant/gocrack.svg?branch=master)](https://travis-ci.org/mandiant/gocrack) [![codecov](https://codecov.io/gh/mandiant/gocrack/branch/master/graph/badge.svg)](https://codecov.io/gh/mandiant/gocrack) [![reportcard](https://goreportcard.com/badge/github.com/mandiant/gocrack)](https://goreportcard.com/report/github.com/mandiant/gocrack)
 
 ![GoCrack Logo](/docs/logo.png)
 
@@ -8,7 +8,7 @@ GoCrack provides APIs to manage password cracking tasks across supported crackin
 
 ## Supported Engines
 
-* [hashcat 5.X+](https://github.com/hashcat/hashcat)
+* [hashcat 6.X+](https://github.com/hashcat/hashcat)
 
 ## Documentation
 

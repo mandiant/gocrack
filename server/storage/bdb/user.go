@@ -3,10 +3,10 @@ package bdb
 import (
 	"time"
 
-	"github.com/fireeye/gocrack/server/storage"
+	"github.com/mandiant/gocrack/server/storage"
 
 	"github.com/asdine/storm"
-	"github.com/satori/go.uuid"
+	"github.com/google/uuid"
 )
 
 // SearchForUserByPassword locates the user record by username. If a record is found, the checker function will be called to validate the password.
@@ -27,7 +27,7 @@ func (s *BoltBackend) SearchForUserByPassword(username string, checker storage.P
 func (s *BoltBackend) CreateUser(user *storage.User) (err error) {
 	user.CreatedAt = time.Now().UTC()
 	if user.UserUUID == "" {
-		user.UserUUID = uuid.NewV4().String()
+		user.UserUUID = uuid.NewString()
 	}
 
 	if err = s.db.From("users").Save(&boltUser{User: *user, DocVersion: curUserVer}); err != nil {

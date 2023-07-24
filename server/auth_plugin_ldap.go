@@ -1,5 +1,6 @@
+//go:build auth_ldap
 // +build auth_ldap
 
 package server
 
-import _ "github.com/fireeye/gocrack/server/authentication/ldap"
+import _ "github.com/mandiant/gocrack/server/authentication/ldap"

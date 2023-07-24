@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/fireeye/gocrack/server/authentication"
-	"github.com/fireeye/gocrack/server/storage"
+	"github.com/mandiant/gocrack/server/authentication"
+	"github.com/mandiant/gocrack/server/storage"
 
 	"github.com/gin-gonic/gin"
 )

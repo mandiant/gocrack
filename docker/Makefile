@@ -2,7 +2,7 @@ ROOT_PROJECT	:= gocrack
 PKG_AUTHOR		:= Christopher Schmitt <chris.schmitt@mandiant.com>
 HASHCAT_VERSION	:= v5.1.0
 
-GOCRACK_PROJ		:= github.com/fireeye/gocrack
+GOCRACK_PROJ		:= github.com/mandiant/gocrack
 GOCRACK_CODE_LOCAL	:= ${GOPATH}/src/$(GOCRACK_PROJ)
 EXTERNAL_DIR		:= $(CURDIR)/external
 HASHCAT_DIR			:= $(EXTERNAL_DIR)/hashcat

@@ -6,9 +6,9 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/fireeye/gocrack/opencl"
-	"github.com/fireeye/gocrack/server/storage"
-	"github.com/fireeye/gocrack/shared"
+	"github.com/mandiant/gocrack/opencl"
+	"github.com/mandiant/gocrack/server/storage"
+	"github.com/mandiant/gocrack/shared"
 )
 
 type TestWorkManagerSuite struct {

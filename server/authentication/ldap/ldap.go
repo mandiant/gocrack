@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/fireeye/gocrack/server/authentication"
-	"github.com/fireeye/gocrack/server/storage"
+	"github.com/mandiant/gocrack/server/authentication"
+	"github.com/mandiant/gocrack/server/storage"
 
-	uuid "github.com/satori/go.uuid"
+	"github.com/google/uuid"
 	ldap "gopkg.in/ldap.v2"
 )
 
@@ -233,7 +233,7 @@ func (s *Backend) Login(username, password string) (*storage.User, error) {
 			Username:     username,
 			IsSuperUser:  isUserFirstAndShouldBeAdmin,
 			EmailAddress: props["mail"],
-			UserUUID:     uuid.NewV4().String(),
+			UserUUID:     uuid.NewString(),
 			Password:     "user_is_ldap",
 		}
 

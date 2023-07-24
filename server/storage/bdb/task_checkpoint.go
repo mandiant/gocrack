@@ -1,6 +1,6 @@
 package bdb
 
-import "github.com/fireeye/gocrack/server/storage"
+import "github.com/mandiant/gocrack/server/storage"
 
 // SaveTaskCheckpoint implements storage.SaveTaskCheckpoint
 func (s *BoltBackend) SaveTaskCheckpoint(checkpoint storage.CheckpointFile) error {

@@ -1,8 +1,8 @@
 package worker
 
 import (
-	"github.com/fireeye/gocrack/opencl"
-	"github.com/fireeye/gocrack/shared"
+	"github.com/mandiant/gocrack/opencl"
+	"github.com/mandiant/gocrack/shared"
 )
 
 // GetAvailableDevices returns all available OpenCL devices with the same ID of hashcat

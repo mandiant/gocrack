@@ -3,8 +3,8 @@ package web
 import (
 	"fmt"
 
-	"github.com/fireeye/gocrack/server/storage"
-	"github.com/fireeye/gocrack/shared"
+	"github.com/mandiant/gocrack/server/storage"
+	"github.com/mandiant/gocrack/shared"
 )
 
 func setEngineFile(stor storage.Backend, engineFileID string) *EngineFileItem {
@@ -58,11 +58,9 @@ func convertStorageTaskToItem(stor storage.Backend, t storage.Task) TaskInfoResp
 			hcitem.AttackMode = "Unknown"
 		}
 
-		if htype := shared.LookupHashcatHashType(ep.HashType); htype != nil {
-			hcitem.HashType = htype.Name
-		} else {
-			hcitem.HashType = fmt.Sprintf("Unknown HashType %d", ep.HashType)
-		}
+		// TODO: Due to some duplicate hash type IDs, we need to come back to this
+		hcitem.HashType = fmt.Sprintf("Type %d", ep.HashType)
+
 		item.EnginePayload = hcitem
 	default:
 		item.EnginePayload = ep

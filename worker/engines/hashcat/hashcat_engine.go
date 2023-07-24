@@ -7,14 +7,14 @@ import (
 	"runtime"
 	"unsafe"
 
-	"github.com/fireeye/gocat"
-	"github.com/fireeye/gocat/hcargp"
-	"github.com/fireeye/gocat/restoreutil"
-	"github.com/fireeye/gocrack/opencl"
-	"github.com/fireeye/gocrack/server/rpc"
-	"github.com/fireeye/gocrack/server/storage"
-	"github.com/fireeye/gocrack/shared"
-	"github.com/fireeye/gocrack/worker"
+	"github.com/mandiant/gocat/v6"
+	"github.com/mandiant/gocat/v6/hcargp"
+	"github.com/mandiant/gocat/v6/restoreutil"
+	"github.com/mandiant/gocrack/opencl"
+	"github.com/mandiant/gocrack/server/rpc"
+	"github.com/mandiant/gocrack/server/storage"
+	"github.com/mandiant/gocrack/shared"
+	"github.com/mandiant/gocrack/worker"
 
 	"github.com/rs/zerolog/log"
 )
@@ -219,7 +219,7 @@ func (s *HashcatEngine) Start() error {
 				}
 			}
 
-			opts.OpenCLDevices = hcargp.GetStringPtr(s.CLDevices.String())
+			opts.BackendDevices = hcargp.GetStringPtr(s.CLDevices.String())
 			opts.OpenCLDeviceTypes = hcargp.GetStringPtr(shared.IntSliceToString(devTypes))
 		}
 	}

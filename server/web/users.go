@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fireeye/gocrack/server/authentication"
-	"github.com/fireeye/gocrack/server/storage"
+	"github.com/mandiant/gocrack/server/authentication"
+	"github.com/mandiant/gocrack/server/storage"
 
 	"github.com/gin-gonic/gin"
 )
@@ -245,8 +245,8 @@ func (s *Server) webRegisterNewUser(c *gin.Context) *WebAPIError {
 
 	if err := req.Validate(); err != nil {
 		return &WebAPIError{
-			StatusCode: http.StatusBadRequest,
-			Err:        err,
+			StatusCode:            http.StatusBadRequest,
+			Err:                   err,
 			CanErrorBeShownToUser: true,
 		}
 	}

@@ -1,0 +1,36 @@
+---
+name: Test master
+on:
+  push:
+    branches: [master]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install build dependencies
+        run: sudo apt-get update -y && sudo apt-get install -y libminizip-dev ocl-icd-libopencl1 ocl-icd-opencl-dev opencl-headers pocl-opencl-icd
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 'stable'
+      - name: Checkout hashcat
+        uses: actions/checkout@v3
+        with:
+          repository: hashcat/hashcat
+          ref: v6.1.1
+          path: hashcat
+      - name: Install hashcat
+        working-directory: ./hashcat
+        run: sudo make install SHARED=1 ENABLE_BRAIN=0
+      - name: Install additional dependencies
+        working-directory: ./hashcat
+        run: |
+          sudo cp deps/LZMA-SDK/C/LzmaDec.h /usr/local/include/hashcat/
+          sudo cp deps/LZMA-SDK/C/7zTypes.h /usr/local/include/hashcat/
+          sudo cp deps/LZMA-SDK/C/Lzma2Dec.h /usr/local/include/hashcat/
+          sudo cp -r ./OpenCL/inc_types.h /usr/local/include/hashcat/
+          sudo cp -r ./deps/zlib/contrib /usr/local/include/hashcat
+          sudo ln -s /usr/local/lib/libhashcat.so.6.1.1 /usr/local/lib/libhashcat.so
+      - name: Run tests
+        run: LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib go test ./...

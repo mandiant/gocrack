@@ -4,8 +4,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fireeye/gocrack/server/storage"
-	"github.com/fireeye/gocrack/shared"
+	"github.com/mandiant/gocrack/server/storage"
+	"github.com/mandiant/gocrack/shared"
 
 	"github.com/tchap/go-exchange/exchange"
 )

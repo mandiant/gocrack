@@ -3,7 +3,7 @@ package bdb
 import (
 	"time"
 
-	"github.com/fireeye/gocrack/server/storage"
+	"github.com/mandiant/gocrack/server/storage"
 
 	"github.com/asdine/storm"
 )
