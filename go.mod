@@ -10,7 +10,7 @@ require (
 	github.com/gorilla/csrf v1.7.0
 	github.com/mandiant/gocat/v6 v6.1.0
 	github.com/nightlyone/lockfile v0.0.0-20170804114028-6a197d5ea611
-	github.com/prometheus/client_golang v1.8.0
+	github.com/prometheus/client_golang v1.11.1
 	github.com/prometheus/client_model v0.2.0
 	github.com/rs/zerolog v1.20.0
 	github.com/shirou/gopsutil v0.0.0-20170510024726-b6da2bd76e7d
@@ -48,8 +48,8 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/prometheus/common v0.14.0 // indirect
-	github.com/prometheus/procfs v0.2.0 // indirect
+	github.com/prometheus/common v0.26.0 // indirect
+	github.com/prometheus/procfs v0.6.0 // indirect
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
 	github.com/tchap/go-patricia v2.3.0+incompatible // indirect
 	github.com/ugorji/go/codec v1.2.6 // indirect
