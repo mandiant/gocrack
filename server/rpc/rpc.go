@@ -4,7 +4,7 @@ import (
 	"errors"
 	"io"
 
-	"github.com/fireeye/gocrack/shared"
+	"github.com/mandiant/gocrack/shared"
 )
 
 // Config describes the configuration used by the GoCrack RPC Listener.

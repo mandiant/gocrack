@@ -7,11 +7,11 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/fireeye/gocrack/server/authentication"
-	"github.com/fireeye/gocrack/server/filemanager"
-	"github.com/fireeye/gocrack/server/storage"
-	"github.com/fireeye/gocrack/server/workmgr"
-	"github.com/fireeye/gocrack/shared"
+	"github.com/mandiant/gocrack/server/authentication"
+	"github.com/mandiant/gocrack/server/filemanager"
+	"github.com/mandiant/gocrack/server/storage"
+	"github.com/mandiant/gocrack/server/workmgr"
+	"github.com/mandiant/gocrack/shared"
 )
 
 var (

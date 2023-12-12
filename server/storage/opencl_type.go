@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/fireeye/gocrack/shared"
+	"github.com/mandiant/gocrack/shared"
 )
 
 // CLDevices is a list of OpenCL device ID's that a task will use on a specific host

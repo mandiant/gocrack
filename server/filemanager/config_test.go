@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/fireeye/gocrack/shared"
+	"github.com/mandiant/gocrack/shared"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -6,10 +6,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/fireeye/gocrack/server/authentication"
-	"github.com/fireeye/gocrack/server/storage"
-	"github.com/fireeye/gocrack/shared"
-	"github.com/fireeye/gocrack/shared/ginlog"
+	"github.com/mandiant/gocrack/server/authentication"
+	"github.com/mandiant/gocrack/server/storage"
+	"github.com/mandiant/gocrack/shared"
+	"github.com/mandiant/gocrack/shared/ginlog"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"

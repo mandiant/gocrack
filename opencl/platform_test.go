@@ -1,7 +1,10 @@
 package opencl
 
-import "testing"
-import "github.com/stretchr/testify/assert"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 type getterTest struct {
 	Out   string
@@ -33,7 +36,7 @@ func TestGetPlatforms(t *testing.T) {
 		}
 
 		devices, err := platform.GetDevices(DeviceTypeAll)
-		assert.Nil(t, err)
+		assert.Nil(t, err, "This can happen if you have a platform installed that legitimately has no devices")
 		assert.True(t, len(devices) > 0)
 	}
 }

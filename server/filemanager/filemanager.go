@@ -12,7 +12,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/fireeye/gocrack/server/storage"
+	"github.com/mandiant/gocrack/server/storage"
 )
 
 // Context contains the state of the filemanager and provides public methods to interact

@@ -7,8 +7,8 @@ import (
 	"sort"
 	"time"
 
-	"github.com/fireeye/gocrack/server/storage"
-	"github.com/fireeye/gocrack/shared"
+	"github.com/mandiant/gocrack/server/storage"
+	"github.com/mandiant/gocrack/shared"
 
 	"github.com/asdine/storm"
 	"github.com/asdine/storm/q"

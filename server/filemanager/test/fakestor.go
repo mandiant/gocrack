@@ -1,6 +1,6 @@
 package test
 
-import "github.com/fireeye/gocrack/server/storage"
+import "github.com/mandiant/gocrack/server/storage"
 
 type TestEngineFileTxn struct {
 	doc   *storage.EngineFile

@@ -1,6 +1,7 @@
 package web
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"mime/multipart"
@@ -10,11 +11,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fireeye/gocat"
-	"github.com/fireeye/gocrack/server/storage"
+	"github.com/mandiant/gocrack/server/storage"
 
 	"github.com/gin-gonic/gin"
-	uuid "github.com/satori/go.uuid"
+	"github.com/google/uuid"
+	"github.com/tankbusta/hashvalidate"
 )
 
 type APIEngine storage.TaskFileEngine
@@ -110,7 +111,7 @@ func (s *Server) webUploadTaskFile(c *gin.Context) *WebAPIError {
 		FileName:       c.Param("filename"),
 		UploadedAt:     time.Now().UTC(),
 		UploadedByUUID: claim.UserUUID,
-		FileID:         uuid.NewV4().String(),
+		FileID:         uuid.NewString(),
 	}
 
 	engineTypeStr, _ := c.GetQuery("engine")
@@ -152,26 +153,54 @@ func (s *Server) webUploadTaskFile(c *gin.Context) *WebAPIError {
 			}
 		}
 
-		vresults, err := gocat.ValidateHashes(fresp.SavedTo, uint32(ftint))
+		file, err := os.Open(fresp.SavedTo)
 		if err != nil {
 			os.Remove(fresp.SavedTo)
 			return &WebAPIError{
 				StatusCode: http.StatusInternalServerError,
+				UserError:  "Could not verify hashes",
 				Err:        err,
-				UserError:  "Could not validate your file",
+			}
+		}
+		defer file.Close()
+
+		hashes := 0
+		errors := make([]string, 0)
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			val := scanner.Text()
+			if err := hashvalidate.ValidateHash(ftint, val); err != nil {
+				// TODO: We should raise some warning here
+				if strings.Contains(err.Error(), "does not exist") {
+					continue
+				}
+
+				errors = append(errors, err.Error())
+				continue
+			}
+
+			hashes++
+		}
+
+		if err := scanner.Err(); err != nil {
+			os.Remove(fresp.SavedTo)
+			return &WebAPIError{
+				StatusCode: http.StatusInternalServerError,
+				UserError:  "Could not verify hashes",
+				Err:        err,
 			}
 		}
 
-		if vresults != nil && len(vresults.Errors) > 0 {
+		if len(errors) > 0 {
 			os.Remove(fresp.SavedTo)
 			c.JSON(http.StatusBadRequest, &TaskFileLintError{
-				Errors:  vresults.Errors,
+				Errors:  errors,
 				Message: "One or more hashes in the file are not valid for the filetype you have selected",
 			})
 			return nil
 		}
-		tf.NumberOfPasswords = int(vresults.NumHashesUnique)
-		tf.NumberOfSalts = int(vresults.NumSalts)
+
+		tf.NumberOfPasswords = hashes
 	}
 
 	if txn, err = s.stor.NewTaskFileTransaction(); err != nil {

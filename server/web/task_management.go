@@ -8,11 +8,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fireeye/gocrack/server/storage"
-	"github.com/fireeye/gocrack/shared"
+	"github.com/mandiant/gocrack/server/storage"
+	"github.com/mandiant/gocrack/shared"
 
 	"github.com/gin-gonic/gin"
-	uuid "github.com/satori/go.uuid"
+	"github.com/google/uuid"
 )
 
 type TaskCrackEngineFancy storage.WorkerCrackEngine
@@ -160,7 +160,7 @@ func (s CreateTaskRequest) validate() []string {
 		errs = append(errs, "task_name must not be empty")
 	}
 
-	if _, err := uuid.FromString(s.FileID); err != nil {
+	if _, err := uuid.Parse(s.FileID); err != nil {
 		errs = append(errs, "file_id must be a valid UUID")
 	}
 
@@ -241,7 +241,7 @@ func (s *Server) webCreateTask(c *gin.Context) *WebAPIError {
 
 	task = storage.Task{
 		TaskName:      request.TaskName,
-		TaskID:        uuid.NewV4().String(),
+		TaskID:        uuid.NewString(),
 		CreatedAt:     now,
 		CreatedByUUID: claim.UserUUID,
 		LastUpdatedAt: now,

@@ -9,6 +9,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+var pythonCommand = "python3"
+
 type remoteProcessManagerTest struct {
 	*RemoteProcessManager
 
@@ -59,7 +61,7 @@ func TestRemoteProcessManager(t *testing.T) {
 	// pid should be unknown at this point because the process hasnt started
 	assert.Equal(t, PIDUNKN, rpmt.GetRunningPID())
 
-	err := rpmt.Start("python", "testdata/printloop.py", "--rc", "25")
+	err := rpmt.Start(pythonCommand, "testdata/printloop.py", "--rc", "25")
 	assert.Nil(t, err)
 	rpmt.Wait()
 
@@ -87,7 +89,7 @@ func rpmKillTest(t *testing.T, sigKill bool) {
 	rpmt := newRemoteProcessManagerTest()
 	defer rpmt.CleanupTest()
 
-	err := rpmt.Start("python", "testdata/printloop.py", "--max", "25")
+	err := rpmt.Start(pythonCommand, "testdata/printloop.py", "--max", "25")
 	assert.Nil(t, err)
 	time.Sleep(2 * time.Second)
 

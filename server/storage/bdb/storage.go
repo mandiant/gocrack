@@ -1,7 +1,7 @@
 package bdb
 
 import (
-	"github.com/fireeye/gocrack/server/storage"
+	"github.com/mandiant/gocrack/server/storage"
 	"github.com/prometheus/client_golang/prometheus"
 
 	"github.com/asdine/storm"

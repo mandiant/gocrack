@@ -6,10 +6,10 @@ import (
 	"os"
 	"testing"
 
-	fakestor "github.com/fireeye/gocrack/server/filemanager/test"
-	"github.com/fireeye/gocrack/server/storage"
+	fakestor "github.com/mandiant/gocrack/server/filemanager/test"
+	"github.com/mandiant/gocrack/server/storage"
 
-	uuid "github.com/satori/go.uuid"
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -69,7 +69,7 @@ func TestSaveEngineFile(t *testing.T) {
 		assert.FailNow(t, "failed to create test file", err.Error())
 	}
 
-	uuidToCreate := uuid.NewV4().String()
+	uuidToCreate := uuid.NewString()
 	fresp, err := fm.SaveFile(testfile, "testing", uuidToCreate, storage.EngineFileDictionary)
 	if err != nil {
 		assert.FailNow(t, "failed to save test file", err.Error())
