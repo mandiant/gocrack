@@ -18,7 +18,7 @@ require (
 	github.com/tankbusta/gzip v0.0.0-20171023233440-5ea045a82e8f
 	github.com/tankbusta/hashvalidate v0.11.1
 	github.com/tchap/go-exchange v0.0.0-20141009085351-ebe3feb493da
-	golang.org/x/crypto v0.0.0-20211209193657-4570a0811e8b
+	golang.org/x/crypto v0.17.0
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gopkg.in/ldap.v2 v2.5.1
 	gopkg.in/square/go-jose.v2 v2.5.1
@@ -55,8 +55,8 @@ require (
 	github.com/ugorji/go/codec v1.2.6 // indirect
 	github.com/vmihailenco/msgpack v4.0.4+incompatible // indirect
 	go.etcd.io/bbolt v1.3.3 // indirect
-	golang.org/x/sys v0.0.0-20211213223007-03aa0b5f6827 // indirect
-	golang.org/x/text v0.3.7 // indirect
+	golang.org/x/sys v0.15.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
 	google.golang.org/appengine v1.6.1 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
